@@ -27,7 +27,7 @@ class Elihel_Detalle(models.Model):
 
     main_line_id = fields.Many2one('elihel.main', string='lineas main', required=True, ondelete='cascade', index=True, copy=False)
   
-    nave = fields.Many2one('elihel.nave.rel', string='Nave / Camion', domain="[('dueno', '=', main_line_id.cliente)]", store=True)
+    nave = fields.Many2one('elihel.nave.rel', string='Nave / Camion', domain="[('es_camion', '=', False)]", store=True)
     obs = fields.Char('Observaciones')
     serie = fields.Char('Serie')
 

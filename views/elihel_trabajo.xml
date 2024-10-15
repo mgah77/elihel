@@ -49,6 +49,19 @@
                   <field name ="lugar"/>
                   <field name ="fecha"/>
                   </group>
+                <notebook>
+                        <page string="Trabajos">
+                            <field name="main_line">
+                            <tree editable="bottom">
+                                <field name ="nave"/>
+                                <field name ="obs"/>
+                       
+                            </tree>
+                            </field>
+
+                        </page>
+
+                    </notebook>
                 </form>
                 </sheet>
             </field>
