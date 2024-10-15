@@ -28,7 +28,7 @@
   parent="elihel_menu"
   sequence="20"
   groups="elihel.group_elihel"  
-  action="elihel_nave_action"/>
+  action="elihel_main_action"/>
 
 
   <menuitem
