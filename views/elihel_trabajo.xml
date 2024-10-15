@@ -54,7 +54,7 @@
                             <field name="main_line">
                             <tree editable="bottom">
                                 <field name ="nave"/>
-                                <field name ="obs"/>
+                                <field name ="lyd"/>
                        
                             </tree>
                             </field>
