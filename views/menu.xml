@@ -20,7 +20,6 @@
   name="Ingreso Trabajos"
   parent="elihel_menu"
   sequence="20"
-  groups="taller.group_elihel"  
   action="elihel_nave_action"/>
 
 
@@ -29,7 +28,6 @@
   name="Barcos/Camiones"
   parent="elihel_menu"
   sequence="25"
-  groups="taller.group_elihel"
   action="elihel_nave_action" />
 
 
