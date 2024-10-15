@@ -5,8 +5,7 @@
   id="elihel_nave_action"
   name="Action Nave"
   res_model="elihel.nave.rel"
-  view_mode="form,tree"/>
-
+  view_mode="tree,form"/>
 
 
 
