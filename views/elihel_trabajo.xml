@@ -16,7 +16,7 @@
             <sheet>
                 <form string="Ingreso/Modificacion Embarcacion" delete="false">
                             <group>
-                                    <field name ="nave"/>
+                                    <field name ="name"/>
                                     <field name ="es_camion"/>
                                     <field name ="matricula"/>
                                     <field name ="precio"/>
@@ -30,7 +30,7 @@
             <field name="model">elihel.nave.rel</field>
             <field name="arch" type="xml">
                 <tree string="Ingreso/Modificacion Embarcacion">
-                                    <field name ="nave"/>
+                                    <field name ="name"/>
                                     <field name ="es_camion"/>
                                     <field name ="matricula"/>
                                     <field name ="precio"/>
