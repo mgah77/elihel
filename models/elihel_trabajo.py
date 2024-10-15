@@ -8,10 +8,13 @@ class Elihel_Trabajos(models.Model):
     name = fields.Char(string="Nro ", readonly=True, default='Nuevo', copy=False)
 
     fecha = fields.Date('Fecha', default=fields.Date.context_today)
-    cliente = fields.Many2one('res.partner',string='Cliente',domain="[('type', '!=', 'private'), ('is_company', '=', True), ('type','=','contact')]")
+    cliente = fields.Many2one('res.partner',string='Cliente')
     obs = fields.Html('Observaciones')
     main_line = fields.One2many(comodel_name = 'elihel.datos',inverse_name = 'main_line_id', string = 'Lineas OT',copy=True)
-    
+    lugar = fields.Selection([
+        ('pmo','Puerto Montt'),       
+        ('cco','Chacabuco')
+        ],string='Lugar')
     state = fields.Selection([
         ('borr','Borrador'),       
         ('cert','Certificado'),
@@ -32,8 +35,7 @@ class Elihel_Nave(models.Model):
     _name = 'elihel.nave.rel'
     _description = 'elihel naves rel'
 
-    nave = fields.Char('Nave', default='Nuevo', index=True)
-    dueno = fields.Many2one('res.partner', string='Dueño',domain="[('type', '!=', 'private'), ('is_company', '=', True), ('type','=','contact')]")
+    nave = fields.Char('Nave', default='Nuevo', index=True)   
     es_camion = fields.Boolean(string="Camion")
     matricula  = fields.Char(string="Matricula", size=6)
     precio = fields.Integer(string = "valor", default=0)
