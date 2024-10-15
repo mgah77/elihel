@@ -1,18 +1,6 @@
 <odoo>
-    <record id="group_taller" model="res.groups">
-	<field name="name">Modulo Taller</field>
-    </record>
-    <record id="group_taller_maestro" model="res.groups">
-	<field name="name">Modulo Taller Maestro</field>
-    </record>
-    <record id="group_nuble" model="res.groups">
-  <field name="name">Taller menus Nuble</field>
-    </record>
-    <record id="group_parvial" model="res.groups">
-  <field name="name">Taller menus ParVial</field>
-    </record>
-    <record id="group_operaciones" model="res.groups">
-    <field name="name">Taller menus Operaciones</field>
+    <record id="group_elihel" model="res.groups">
+	<field name="name">Modulo Elihel</field>
     </record>
 
 </odoo>

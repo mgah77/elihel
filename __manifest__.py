@@ -10,19 +10,9 @@
 'data': ['security/groups.xml',
          'security/ir.model.access.csv',
 
-         'views/product_template.xml',
-         'views/menu.xml',
-         'views/orden_trabajo.xml',
-         'views/planificacion.xml',
-         'views/maniobras.xml',
-         'views/maestro.xml',
-         'wizard/taller_excel.xml',
+         'views/elihel_trabajo.xml',
 ],
-'assets': {
-    "web.assets_backend": [
-        'taller/static/src/js/action_manager.js',
-    ],
-},
 
-'depends': ['base' , 'contacts' , 'stock' , 'product', 'parches_insumar','calendar']
+
+'depends': ['base' , 'contacts' , 'stock' , 'product']
 }

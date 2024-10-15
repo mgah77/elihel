@@ -1,7 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_taller_ot,access.taller.ot,model_taller_ot,group_taller,1,1,1,1
-access_taller_ot_line,access.taller.ot.line,model_taller_ot_line,group_taller,1,1,1,1
-access_taller_depto_rel,access.taller.depto.rel,model_taller_depto_rel,group_taller,1,1,1,1
-access_taller_maniobras,access.taller.maniobras,model_taller_maniobras,group_taller,1,1,1,1
-access_taller_lugar_rel,access.taller.lugar.rel,model_taller_lugar_rel,group_taller,1,1,1,1
-access_taller_xlsx_wizard,access_taller_xlsx_wizard,model_taller_xlsx_wizard,group_taller,1,1,1,1
+access_elihel_main,access.elihel.main,model_elihel_main,group_elihel,1,1,1,1
+access_elihel_datos,access.elihel.datos,model_elihel_datos,group_elihel,1,1,1,1
+access_elihel_nave_rel,access.elihel.nave.rel,model_elihel_nave_rel,group_elihel,1,1,1,1
