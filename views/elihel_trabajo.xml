@@ -30,6 +30,30 @@
                 </form>
             </field>
         </record>
+        <record id="elh_nave_tree" model="ir.ui.view">
+            <field name="name">Naves_tree</field>
+            <field name="model">elihel.nave.rel</field>
+            <field name="arch" type="xml">
+                <tree string="Ingreso/Modificacion Embarcacion">
+                                    <field name ="dueno"/>
+                                    <field name ="nave"/>
+                                    <field name ="es_camion"/>
+                                    <field name ="matricula"/>
+                                    <field name ="precio"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="elh_main_tree" model="ir.ui.view">
+            <field name="name">Naves_tree</field>
+            <field name="model">elihel.main</field>
+            <field name="arch" type="xml">
+                <tree string="Ingreso/Modificacion Embarcacion">
+                                    <field name ="cliente"/>
+                                    <field name ="fecha"/>
+                </tree>
+            </field>
+        </record>
 
 
 </odoo>
