@@ -9,8 +9,6 @@
 
 
 
-
-
 <menuitem
   id="elihel_menu"
   name="Trabajos Elihel"
@@ -29,12 +27,10 @@
   <menuitem
   id="elh_nave_menu"
   name="Barcos/Camiones"
-  parent="taller_menu"
+  parent="elihel_menu"
   sequence="25"
   groups="taller.group_elihel"
   action="elihel_nave_action" />
-
-
 
 
 </odoo>
