@@ -55,7 +55,9 @@
                             <tree editable="bottom">
                                 <field name ="nave"/>
                                 <field name ="lyd"/>
-                       
+                                <field name ="sai"/>
+                                <field name ="vuf"/>
+                                <field name ="crm"/>
                             </tree>
                             </field>
 
