@@ -15,7 +15,6 @@
             <field name="arch" type="xml">
                 <form string="Ingreso/Modificacion Embarcacion" delete="false">
                             <group>
-                                    <field name ="dueno"/>
                                     <field name ="nave"/>
                                     <field name ="es_camion"/>
                                     <field name ="matricula"/>
@@ -29,7 +28,6 @@
             <field name="model">elihel.nave.rel</field>
             <field name="arch" type="xml">
                 <tree string="Ingreso/Modificacion Embarcacion">
-                                    <field name ="dueno"/>
                                     <field name ="nave"/>
                                     <field name ="es_camion"/>
                                     <field name ="matricula"/>
