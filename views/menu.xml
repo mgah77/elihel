@@ -7,6 +7,12 @@
   res_model="elihel.nave.rel"
   view_mode="tree,form"/>
 
+  <act_window
+  id="elihel_main_action"
+  name="Action Main"
+  res_model="elihel.main"
+  view_mode="tree,form"/>
+
 
 
 <menuitem

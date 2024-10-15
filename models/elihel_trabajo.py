@@ -24,7 +24,7 @@ class Elihel_Detalle(models.Model):
 
     main_line_id = fields.Many2one('elihel.main', string='lineas main', required=True, ondelete='cascade', index=True, copy=False)
   
-    nave = fields.Many2one('elihel.nave.rel', string='Nave / Camion', store=True)
+    nave = fields.Many2one('elihel.nave.rel', string='Nave / Camion', domain="[('dueno', '=', main_line_id.cliente)]", store=True)
     obs = fields.Char('Observaciones')
     serie = fields.Char('Serie')
 
@@ -34,6 +34,6 @@ class Elihel_Nave(models.Model):
 
     nave = fields.Char('Nave', default='Nuevo', index=True)
     dueno = fields.Many2one('res.partner', string='Dueño',domain="[('type', '!=', 'private'), ('is_company', '=', True), ('type','=','contact')]")
-    es_camion = fields.Boolean('Camion')
-    matricula  = fields.Char('Matricula', size=6)
-    precio = fields.Integer(string = 'plata', default=0)
+    es_camion = fields.Boolean(string="Camion")
+    matricula  = fields.Char(string="Matricula", size=6)
+    precio = fields.Integer(string = "valor", default=0)
