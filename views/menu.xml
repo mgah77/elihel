@@ -15,8 +15,7 @@
   id="elihel_menu"
   name="Trabajos Elihel"
   parent=""
-  sequence="34"
-  groups="taller.group_elihel" />
+  sequence="34" />
 
 <menuitem
   id="elh_ingreso"
