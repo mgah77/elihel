@@ -36,33 +36,34 @@ class Elihel_Detalle(models.Model):
     eee = fields.Integer(string="E.E.E.", help="Estanque ensilaje y equipos")
     rox = fields.Integer(string="Rack O", help="Rack Oxigeno")
     pcr = fields.Integer(string="Portacr", help="Portacrios")
-    rag = fields.Integer(string="Rack Agua", help="Rack Agua")
-    bic = fields.Integer(string="Bin Com", help="Bins Completos")
-    bmm = fields.Integer(string="Bin Mort", help="Bins Mort/Mat/Viv")
-    lob = fields.Integer(string="Lonas B", help="Lonas de baño")
+    rag = fields.Integer(string="Rack Ag", help="Rack Agua")
+    bic = fields.Integer(string="Bin Co", help="Bins Completos")
+    bmm = fields.Integer(string="Bin Mo", help="Bins Mort/Mat/Viv")
+    lob = fields.Integer(string="Lona B", help="Lonas baño peces")
     ibc = fields.Integer(string="IBC", help="IBC")
     ist = fields.Integer(string="Isot", help="Isotanques")
-    stk = fields.Integer(string="stk", help="Stk Combustible")
-    moc = fields.Integer(string="Motocomp", help="Motocompresor")
-    cbu = fields.Integer(string="Comp Buceo", help="Compresor Buceo")
-    pdo = fields.Integer(string="P Doble", help="Pasillo Doble")
-    pdt = fields.Integer(string="P Doble T", help="Pasillo Doble T")
-    psi = fields.Integer(string="P Simple", help="Pasillo Simple")
+    stk = fields.Integer(string="stk", help="Estanque Combustible")
+    moc = fields.Integer(string="Motocom", help="Motocompresor")
+    cbu = fields.Integer(string="Compr B", help="Compresor Buceo")
+    pdo = fields.Integer(string="P Dob", help="Pasillo Doble")
+    pdt = fields.Integer(string="P Dob T", help="Pasillo Doble T")
+    psi = fields.Integer(string="P Simp", help="Pasillo Simple")
     pst = fields.Integer(string="P T", help="Pasillo T")
-    crp = fields.Integer(string="Cruceta P", help="Cruceta Pasillos")
-    exm = fields.Integer(string="Extr Mort", help="Extracion Mort")
+    crp = fields.Integer(string="Cruc P", help="Cruceta Pasillos")
+    exm = fields.Integer(string="Ext Mor", help="Extractor Mort")
     flg = fields.Integer(string="Flot. G", help="Flot. Grandes")
     flc = fields.Integer(string="Flot. C", help="Flot. Chicos")
-    byp = fields.Integer(string="Boya Pl", help="Boyas Plast.")
-    bym = fields.Integer(string="Boya Met", help="Boyas Metalicas")
+    byp = fields.Integer(string="Boya Pl", help="Boyas Plasticas")
+    bym = fields.Integer(string="Boya Me", help="Boyas Metalicas")
     bot = fields.Integer(string="Bote", help="Bote")
-    rpe = fields.Integer(string="Reja Peri", help="Rejas Perimetrales")
+    rpe = fields.Integer(string="Reja Pe", help="Rejas Perimetrales")
     pls = fields.Integer(string="Plansa", help="Plansas")
-    con = fields.Integer(string="Cono Mort", help="Conos Mortex")
-    tah = fields.Integer(string="Tam Hidr", help="Tambores Hidrocarb.")
-    rol = fields.Integer(string="Rll Cabos", help="Rollos Cabos")
-    plu = fields.Integer(string="Caja Plu", help="Cajas Plumavit")
-    mat = fields.Integer(string="Mat Ret", help="Mat. Ret.")
+    con = fields.Integer(string="Cono Mo", help="Conos Mortex")
+    tah = fields.Integer(string="Tam Hid", help="Tambores Hidrocarb.")
+    rol = fields.Integer(string="R Cabos", help="Rollos Cabos")
+    plu = fields.Integer(string="Caja Pl", help="Cajas Plumavit")
+    cad = fields.Integer(string="Paño Cd", help="Paño Cadenas")
+    mat = fields.Integer(string="Mat R", help="Mat. Retorno")
     ens = fields.Integer(string="Ensil.", help="Ensilaje")
 
     obs = fields.Char('Observaciones')
@@ -76,3 +77,18 @@ class Elihel_Nave(models.Model):
     es_camion = fields.Boolean(string="Camion")
     matricula  = fields.Char(string="Matricula", size=6)
     precio = fields.Integer(string = "valor", default=0)
+
+class Elihel_ServiciosNavePMO(models.Model):
+    _name = 'elihel.serv_pmo.rel'
+    _description = 'elihel servicios rel'
+
+    name = fields.Char('Servicio', index=True)   
+    precio = fields.Integer(string = "valor")
+
+class Elihel_ServiciosNaveCCO(models.Model):
+    _name = 'elihel.serv_cco.rel'
+    _description = 'elihel servicios rel'
+
+    name = fields.Char('Servicio', index=True)   
+    precio = fields.Integer(string = "valor")
+

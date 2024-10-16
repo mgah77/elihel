@@ -13,7 +13,17 @@
   res_model="elihel.main"
   view_mode="tree,form"/>
 
+<act_window
+  id="elihel_pmo_action"
+  name="Servicios PMO"
+  res_model="elihel.serv_pmo.rel"
+  view_mode="tree"/>
 
+<act_window
+  id="elihel_cco_action"
+  name="Servicios CCO"
+  res_model="elihel.serv_cco.rel"
+  view_mode="tree"/>
 
 <menuitem
   id="elihel_menu"
@@ -39,5 +49,27 @@
   groups="elihel.group_elihel"
   action="elihel_nave_action" />
 
+<menuitem
+  id="elh_s_menu"
+  name="Servicios"
+  parent="elihel_menu"
+  sequence="45"
+  groups="elihel.group_elihel" />
+
+  <menuitem
+  id="elh_s_pmo"
+  name="Servicios PMO"
+  parent="elh_s_menu"
+  sequence="15"
+  groups="elihel.group_elihel"
+  action="elihel_pmo_action" />
+
+  <menuitem
+  id="elh_s_cco"
+  name="Servicios CCO"
+  parent="elh_s_menu"
+  sequence="25"
+  groups="elihel.group_elihel"
+  action="elihel_cco_action" />
 
 </odoo>

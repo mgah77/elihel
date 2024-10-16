@@ -8,7 +8,6 @@
     </record>
 
 
-
        <record id="elh_nave_form" model="ir.ui.view">
             <field name="name">Naves</field>
             <field name="model">elihel.nave.rel</field>
@@ -88,6 +87,7 @@
                                 <field name ="tah"/>
                                 <field name ="rol"/>
                                 <field name ="plu"/>
+                                <field name ="cad"/>
                                 <field name ="mat"/>
                                 <field name ="ens"/>
                             </tree>
@@ -113,5 +113,25 @@
             </field>
         </record>
 
+ <record id="elh_pmo_tree" model="ir.ui.view">
+            <field name="name">pmo_tree</field>
+            <field name="model">elihel.serv_pmo.rel</field>
+            <field name="arch" type="xml">
+                <tree string="Ingreso/Modificacion Servicio">
+                                    <field name ="name"/>
+                                    <field name ="precio"/>
+                </tree>
+            </field>
+        </record>
 
+  <record id="elh_cco_tree" model="ir.ui.view">
+            <field name="name">cco_tree</field>
+            <field name="model">elihel.serv_cco.rel</field>
+            <field name="arch" type="xml">
+                <tree string="Ingreso/Modificacion Servicio">
+                                    <field name ="name"/>
+                                    <field name ="precio"/>
+                </tree>
+            </field>
+        </record>
 </odoo>

@@ -11,6 +11,7 @@
          'security/ir.model.access.csv',
          'views/menu.xml',
          'views/elihel_trabajo.xml',
+         'data/servicios_data.xml',
          
 ],
 
