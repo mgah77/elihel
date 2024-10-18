@@ -12,16 +12,18 @@
             <field name="name">Naves</field>
             <field name="model">elihel.nave.rel</field>
             <field name="arch" type="xml">
-            <sheet>
+            
                 <form string="Ingreso/Modificacion Embarcacion" delete="false">
+                <sheet>
                             <group>
                                     <field name ="name"/>
                                     <field name ="es_camion"/>
                                     <field name ="matricula"/>
                                     <field name ="precio"/>
                             </group>        
-                </form>
                 </sheet>
+                </form>
+                
             </field>
         </record>
         <record id="elh_nave_tree" model="ir.ui.view">
@@ -42,8 +44,8 @@
             <field name="name">Trabajos</field>
             <field name="model">elihel.main</field>
             <field name="arch" type="xml">
-            <sheet>
-                <form string="Orden de trabajo" delete="false">
+            <form string="Orden de trabajo" delete="false">
+                <sheet>
                 <group>
                   <field name ="lugar"/>
                   <field name ="fecha"/>
@@ -96,8 +98,9 @@
                         </page>
 
                     </notebook>
+                     </sheet>
                 </form>
-                </sheet>
+               
             </field>
         </record>
 
