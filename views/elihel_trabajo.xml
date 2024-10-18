@@ -41,73 +41,67 @@
 
 
     <record id="elh_form" model="ir.ui.view">
-            <field name="name">Trabajos</field>
-            <field name="model">elihel.main</field>
-            <field name="arch" type="xml">
-            <form string="Orden de trabajo" delete="false">
-                <sheet>
+    <field name="name">Trabajos</field>
+    <field name="model">elihel.main</field>
+    <field name="arch" type="xml">
+        <form string="Orden de trabajo" delete="false">
+            <sheet>
                 <group>
-                  <field name ="lugar"/>
-                  <field name ="fecha"/>
-                  </group>
-                  <group>
-                  <field name="main_line">
-                        <field name ="nave"/>
-                  </field>
-                  </group>
+                    <field name="lugar"/>
+                    <field name="fecha"/>
+                    <field name="nave"/>
+                </group>
+
                 <notebook>
-                        <page string="Trabajos">
-                            <field name="main_line">
+                    <page string="Trabajos">
+
+                        <field name="main_line">
                             <tree editable="bottom">
-                                <field name ="nave"/>
-                                <field name ="lyd"/>
-                                <field name ="sai"/>
-                                <field name ="vuf"/>
-                                <field name ="crm"/>
-                                <field name ="rfr"/>
-                                <field name ="eee"/>
-                                <field name ="rox"/>
-                                <field name ="pcr"/>
-                                <field name ="rag"/>
-                                <field name ="bic"/>
-                                <field name ="bmm"/>
-                                <field name ="lob"/>
-                                <field name ="ibc"/>
-                                <field name ="ist"/>
-                                <field name ="stk"/>
-                                <field name ="moc"/>
-                                <field name ="cbu"/>
-                                <field name ="pdo"/>
-                                <field name ="pdt"/>
-                                <field name ="psi"/>
-                                <field name ="pst"/>
-                                <field name ="crp"/>
-                                <field name ="exm"/>
-                                <field name ="flg"/>
-                                <field name ="flc"/>
-                                <field name ="byp"/>
-                                <field name ="bym"/>
-                                <field name ="bot"/>
-                                <field name ="rpe"/>
-                                <field name ="pls"/>
-                                <field name ="con"/>
-                                <field name ="tah"/>
-                                <field name ="rol"/>
-                                <field name ="plu"/>
-                                <field name ="cad"/>
-                                <field name ="mat"/>
-                                <field name ="ens"/>
+                                <field name="lyd"/>
+                                <field name="sai"/>
+                                <field name="vuf"/>
+                                <field name="crm"/>
+                                <field name="rfr"/>
+                                <field name="eee"/>
+                                <field name="rox"/>
+                                <field name="pcr"/>
+                                <field name="rag"/>
+                                <field name="bic"/>
+                                <field name="bmm"/>
+                                <field name="lob"/>
+                                <field name="ibc"/>
+                                <field name="ist"/>
+                                <field name="stk"/>
+                                <field name="moc"/>
+                                <field name="cbu"/>
+                                <field name="pdo"/>
+                                <field name="pdt"/>
+                                <field name="psi"/>
+                                <field name="pst"/>
+                                <field name="crp"/>
+                                <field name="exm"/>
+                                <field name="flg"/>
+                                <field name="flc"/>
+                                <field name="byp"/>
+                                <field name="bym"/>
+                                <field name="bot"/>
+                                <field name="rpe"/>
+                                <field name="pls"/>
+                                <field name="con"/>
+                                <field name="tah"/>
+                                <field name="rol"/>
+                                <field name="plu"/>
+                                <field name="cad"/>
+                                <field name="mat"/>
+                                <field name="ens"/>
                             </tree>
-                            </field>
-
-                        </page>
-
-                    </notebook>
-                     </sheet>
-                </form>
-               
-            </field>
-        </record>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
 
 
          <record id="elh_main_tree" model="ir.ui.view">

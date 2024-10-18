@@ -10,6 +10,7 @@ class Elihel_Trabajos(models.Model):
     fecha = fields.Date('Fecha', default=fields.Date.context_today)
     cliente = fields.Many2one('res.partner',string='Cliente')
     obs = fields.Html('Observaciones')
+    nave = fields.Many2one('elihel.nave.rel', string='Embarcacion', store=True)
     main_line = fields.One2many(comodel_name = 'elihel.datos',inverse_name = 'main_line_id', string = 'Lineas OT',copy=True)
     lugar = fields.Selection([
         ('pmo','Puerto Montt'),       
@@ -25,9 +26,8 @@ class Elihel_Detalle(models.Model):
     _name = 'elihel.datos'
     _description = 'Elihel detalle'
 
-    main_line_id = fields.Many2one('elihel.main', string='lineas main', required=True, ondelete='cascade', index=True, copy=False)
-  
-    nave = fields.Many2one('elihel.nave.rel', string='Nave / Camion', domain="[('es_camion', '=', False)]", store=True)
+    main_line_id = fields.Many2one('elihel.main', string='lineas main', required=True, ondelete='cascade', index=True, copy=False)  
+    
     lyd = fields.Integer(string="L y D", help="Limpieza y Desinfeccion")
     sai = fields.Integer(string="S Int", help="Sanitizado Interior")
     vuf = fields.Integer(string="V F", help="Vuelta Falsa")
