@@ -47,9 +47,14 @@
         <form string="Orden de trabajo" delete="false">
             <sheet>
                 <group>
+                <group>
                     <field name="lugar"/>
                     <field name="fecha"/>
+                </group>
+                <group>
                     <field name="nave"/>
+                    <field name="camiones"/>
+                </group>
                 </group>
 
                 <notebook>
