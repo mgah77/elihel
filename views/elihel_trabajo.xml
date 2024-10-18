@@ -17,7 +17,6 @@
                 <sheet>
                             <group>
                                     <field name ="name"/>
-                                    <field name ="es_camion"/>
                                     <field name ="matricula"/>
                                     <field name ="precio"/>
                             </group>        
@@ -32,7 +31,6 @@
             <field name="arch" type="xml">
                 <tree string="Ingreso/Modificacion Embarcacion">
                                     <field name ="name"/>
-                                    <field name ="es_camion"/>
                                     <field name ="matricula"/>
                                     <field name ="precio"/>
                 </tree>
