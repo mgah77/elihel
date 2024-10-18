@@ -50,6 +50,11 @@
                   <field name ="lugar"/>
                   <field name ="fecha"/>
                   </group>
+                  <group>
+                  <field name="main_line">
+                        <field name ="nave"/>
+                  </field>
+                  </group>
                 <notebook>
                         <page string="Trabajos">
                             <field name="main_line">
