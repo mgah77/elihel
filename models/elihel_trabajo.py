@@ -74,7 +74,7 @@ class Elihel_Nave(models.Model):
     _description = 'elihel naves rel'
 
     name = fields.Char('Nave', default='Nuevo', index=True)   
-    es_camion = fields.Boolean(string="Camion")
+    es_camion = fields.Boolean(string="Camion", default=False)
     matricula  = fields.Char(string="Matricula", size=6)
     precio = fields.Integer(string = "valor", default=0)
 
