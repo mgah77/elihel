@@ -113,6 +113,7 @@
             <field name="arch" type="xml">
                 <tree string="Ingreso/Modificacion Embarcacion">
                                     <field name ="lugar"/>
+                                    <field name ="nave"/>
                                     <field name ="fecha"/>
                 </tree>
             </field>
