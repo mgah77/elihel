@@ -10,7 +10,7 @@ class Elihel_Trabajos(models.Model):
     fecha = fields.Date('Fecha', default=fields.Date.context_today)
     cliente = fields.Many2one('res.partner',string='Cliente')
     obs = fields.Html('Observaciones')
-    nave = fields.Many2one('elihel.nave.rel', string='Embarcacion', store=True, readonly=True)
+    nave = fields.Many2one('elihel.nave.rel', string='Embarcacion', store=True)
     camiones = fields.Boolean(string="Lleva camiones?", default=False)
     main_line = fields.One2many(comodel_name = 'elihel.datos',inverse_name = 'main_line_id', string = 'Lineas OT',copy=True)
     lugar = fields.Selection([

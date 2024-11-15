@@ -50,7 +50,7 @@
                     <field name="fecha"/>
                 </group>
                 <group>
-                    <field name="nave"/>
+                    <field name="nave" options="{'no_create': True}"/>
                     <field name="camiones"/>
                 </group>
                 </group>
