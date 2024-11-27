@@ -3,13 +3,13 @@
 
  <act_window
   id="elihel_nave_action"
-  name="Action Nave"
+  name="Datos Barcos"
   res_model="elihel.nave.rel"
   view_mode="tree,form"/>
 
   <act_window
   id="elihel_main_action"
-  name="Action Main"
+  name="Lista de Trabajos"
   res_model="elihel.main"
   view_mode="tree,form"/>
 
@@ -43,7 +43,7 @@
 
   <menuitem
   id="elh_nave_menu"
-  name="Barcos/Camiones"
+  name="Datos Barcos"
   parent="elihel_menu"
   sequence="25"
   groups="elihel.group_elihel"
