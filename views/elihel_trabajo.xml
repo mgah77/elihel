@@ -54,7 +54,7 @@
                     <field name="camiones"/>
                 </group>
                 </group>
-                <div>
+                <div class="o_form_border">
                 <notebook>
                     <page string="Trabajos">
                         <group>
