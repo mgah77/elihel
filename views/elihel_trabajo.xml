@@ -55,10 +55,11 @@
                 </group>
                 </group>
 
-                <notebook>
+                
                     <page string="Trabajos">
-
-                        <field name="main_line">
+                        <field name="lugar"/>
+                        <field name="fecha"/>
+                        <!--field name="main_line">
                             <tree editable="bottom">
                                 <field name="lyd"/>
                                 <field name="sai"/>
@@ -98,8 +99,8 @@
                                 <field name="mat"/>
                                 <field name="ens"/>
                             </tree>
-                        </field>
-                    </page>
+                        </field!-->
+                   
                 </notebook>
             </sheet>
         </form>
