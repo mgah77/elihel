@@ -57,8 +57,10 @@
 
                 <notebook>
                     <page string="Trabajos">
-                     <field name="lugar"/>
+                     <group>
+                    <field name="lugar"/>
                     <field name="fecha"/>
+                    </group>
                     </page>
                 </notebook>
             </sheet>
