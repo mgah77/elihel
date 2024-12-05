@@ -147,4 +147,16 @@
                 </tree>
             </field>
         </record>
+    <record id="elh_cco_form" model="ir.ui.view">
+            <field name="name">cco_form</field>
+            <field name="model">elihel.serv_cco.rel</field>
+            <field name="arch" type="xml">
+                <form string="Ingreso/Modificacion Servicio">
+                <group>
+                                    <field name ="name"/>
+                                    <field name ="precio"/>
+                </group>
+                </form>
+            </field>
+        </record>
 </odoo>
