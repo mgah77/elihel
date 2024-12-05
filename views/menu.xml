@@ -17,13 +17,13 @@
   id="elihel_pmo_action"
   name="Servicios PMO"
   res_model="elihel.serv_pmo.rel"
-  view_mode="tree"/>
+  view_mode="tree,form"/>
 
 <act_window
   id="elihel_cco_action"
   name="Servicios CCO"
   res_model="elihel.serv_cco.rel"
-  view_mode="tree"/>
+  view_mode="tree,form"/>
 
 <menuitem
   id="elihel_menu"
