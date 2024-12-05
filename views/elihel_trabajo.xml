@@ -152,10 +152,13 @@
             <field name="model">elihel.serv_cco.rel</field>
             <field name="arch" type="xml">
                 <form string="Ingreso/Modificacion Servicio">
-                <group>
-                                    <field name ="name"/>
-                                    <field name ="precio"/>
-                </group>
+                <sheet>
+                    <group>                
+                                        <field name ="name"/>
+                                        <field name ="precio"/>
+                    
+                    </group>
+                </sheet>
                 </form>
             </field>
         </record>
@@ -165,10 +168,13 @@
             <field name="model">elihel.serv_pmo.rel</field>
             <field name="arch" type="xml">
                 <form string="Ingreso/Modificacion Servicio">
-                <group>
-                                    <field name ="name"/>
-                                    <field name ="precio"/>
-                </group>
+                <sheet>
+                    <group>                
+                                        <field name ="name"/>
+                                        <field name ="precio"/>
+                    
+                    </group>
+                </sheet>
                 </form>
             </field>
         </record>
