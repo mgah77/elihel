@@ -74,7 +74,7 @@ class Elihel_ServiciosNavePMO(models.Model):
     _name = 'elihel.serv_pmo.rel'
     _description = 'elihel servicios rel'
 
-    name = fields.Char('Servicio', index=True)   
+    name = fields.Char('Servicio', index=True, readonly=True)   
     precio = fields.Integer(string = "valor")
 
 class Elihel_ServiciosNaveCCO(models.Model):
