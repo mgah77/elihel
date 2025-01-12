@@ -53,7 +53,7 @@
                 <group>
                     <field name="nave" options="{'no_create': True}"/>
                     <field name="camiones"/>
-                    <field name="matriculas"/>
+                    <field name="matriculas" widget="many2many_tags" attrs="{'invisible': [('camiones', '=', False)]}"/>
                 </group>
                 </group>
                </div>
