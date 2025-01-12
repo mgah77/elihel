@@ -12,6 +12,7 @@ class Elihel_Trabajos(models.Model):
     obs = fields.Html('Observaciones')
     nave = fields.Many2one('elihel.nave.rel', string='Embarcacion', store=True)
     camiones = fields.Boolean(string="Lleva camiones?", default=False)
+    matriculas = fields.Many2many('elihel.serv_mat.rel', string='Matriculas')
     
     lugar = fields.Selection([
         ('pmo','Puerto Montt'),       
@@ -83,4 +84,10 @@ class Elihel_ServiciosNaveCCO(models.Model):
 
     name = fields.Char('Servicio', index=True)   
     precio = fields.Integer(string = "valor")
+
+class Elihel_ServiciosMatriculas(models.Model):
+    _name = 'elihel.serv_mat.rel'
+    _description = 'elihel servicios matr'
+
+    name = fields.Char('Matricula', index=True, size=6)  
 
