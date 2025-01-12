@@ -53,6 +53,7 @@
                 <group>
                     <field name="nave" options="{'no_create': True}"/>
                     <field name="camiones"/>
+                    <field name="matriculas"/>
                 </group>
                 </group>
                </div>
