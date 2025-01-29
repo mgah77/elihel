@@ -42,8 +42,11 @@
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>
+
         <menuitem id="estados_menu"
             parent="elihel_menu"
+            sequence="22"
+            groups="elihel.group_elihel"
             action="action_cobro" />
     </data>
 </odoo>
