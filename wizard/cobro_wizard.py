@@ -3,8 +3,8 @@ from datetime import date
 
 class EstadoWizard(models.TransientModel):
     _name = "wizard.cobro"
-    _description = "Estado de pago de clientes"
-    
+    _description = "Cobros"
+
     mes = fields.Selection([
         ('01', 'Enero'), ('02', 'Febrero'), ('03', 'Marzo'), ('04', 'Abril'),
         ('05', 'Mayo'), ('06', 'Junio'), ('07', 'Julio'), ('08', 'Agosto'),
@@ -14,6 +14,8 @@ class EstadoWizard(models.TransientModel):
     
     @api.depends('cliente')
     def _compute_cantidad_vencida(self):
+        if self.mes:
+           
         return
 
     def action_print_report(self):

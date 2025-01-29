@@ -43,8 +43,6 @@
             <field name="target">new</field>
         </record>
 
-
-
         <menuitem id="estados_menu"                
             name="Cobros"
             parent="elihel_menu"
