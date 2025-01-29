@@ -43,7 +43,10 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem id="estados_menu"
+
+
+        <menuitem id="estados_menu"                
+            name="Cobros"
             parent="elihel_menu"
             sequence="22"
             groups="elihel.group_elihel"
