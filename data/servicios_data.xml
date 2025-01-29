@@ -142,5 +142,148 @@
             <field name="name">Contenedores</field>
             <field name="precio">6118</field>
         </record>
+
+
+         <!-- Registros predefinidos para elihel.serv.rel -->
+        <record id="camion" model="elihel.serv_cco.rel">
+            <field name="name">Camion</field>
+            <field name="precio">7931</field>
+        </record>
+        <record id="rfr" model="elihel.serv_cco.rel">
+            <field name="name">Reefer</field>
+            <field name="precio">25000</field>
+        </record>
+        <record id="eee" model="elihel.serv_cco.rel">
+            <field name="name">Estanque ensilaje y equipos</field>
+            <field name="precio">25000</field>
+        </record>
+        <record id="pdo" model="elihel.serv_cco.rel">
+            <field name="name">Pasillo Doble</field>
+            <field name="precio">10197</field>
+        </record>
+        <record id="pdt" model="elihel.serv_cco.rel">
+            <field name="name">Pasillo Doble T</field>
+            <field name="precio">10197</field>
+        </record>
+        <record id="psi" model="elihel.serv_cco.rel">
+            <field name="name">Pasillo Simple</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="pst" model="elihel.serv_cco.rel">
+            <field name="name">Pasillo T</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="pls" model="elihel.serv_cco.rel">
+            <field name="name">Plansas</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="con" model="elihel.serv_cco.rel">
+            <field name="name">Conos Mortex</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="tah" model="elihel.serv_cco.rel">
+            <field name="name">Tambores Hidrocarburos</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="rol" model="elihel.serv_cco.rel">
+            <field name="name">Rollo Cabos</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="plu" model="elihel.serv_cco.rel">
+            <field name="name">Cajas Plumavit</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="cad" model="elihel.serv_cco.rel">
+            <field name="name">Paño Cadenas</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="crp" model="elihel.serv_cco.rel">
+            <field name="name">Cruceta Pasillos</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="exm" model="elihel.serv_cco.rel">
+            <field name="name">Extractor Mort</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="flg" model="elihel.serv_cco.rel">
+            <field name="name">Flotadores Grandes</field>
+            <field name="precio">4206</field>
+        </record>
+        <record id="flc" model="elihel.serv_cco.rel">
+            <field name="name">Flotadores Chicos</field>
+            <field name="precio">2804</field>
+        </record>
+        <record id="bym" model="elihel.serv_cco.rel">
+            <field name="name">Boyas Metalicas</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="byp" model="elihel.serv_cco.rel">
+            <field name="name">Boyas Plasticas</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="bot" model="elihel.serv_cco.rel">
+            <field name="name">Bote</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="bic" model="elihel.serv_cco.rel">
+            <field name="name">Bins Completo</field>
+            <field name="precio">4532</field>
+        </record>
+        <record id="bmm" model="elihel.serv_cco.rel">
+            <field name="name">Bins Cosecha/Mort</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="lob" model="elihel.serv_cco.rel">
+            <field name="name">Lona Baño Peces</field>
+            <field name="precio">10197</field>
+        </record>
+        <record id="mat" model="elihel.serv_cco.rel">
+            <field name="name">Mat Retorno</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="moc" model="elihel.serv_cco.rel">
+            <field name="name">Motocompresor</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="rox" model="elihel.serv_cco.rel">
+            <field name="name">Rack Oxigeno</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="pcr" model="elihel.serv_cco.rel">
+            <field name="name">Portacrios</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="rag" model="elihel.serv_cco.rel">
+            <field name="name">Rack Agua</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="ibc" model="elihel.serv_cco.rel">
+            <field name="name">IBC</field>
+            <field name="precio">4532</field>
+        </record>
+        <record id="stk" model="elihel.serv_cco.rel">
+            <field name="name">Estanque combustible</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="ens" model="elihel.serv_cco.rel">
+            <field name="name">Ensilaje</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="ist" model="elihel.serv_cco.rel">
+            <field name="name">Isotanques</field>
+            <field name="precio">6118</field>
+        </record>
+        <record id="cbu" model="elihel.serv_cco.rel">
+            <field name="name">Compresor Buceo</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="rpe" model="elihel.serv_cco.rel">
+            <field name="name">Rejas Perimetrales</field>
+            <field name="precio">5099</field>
+        </record>
+        <record id="crm" model="elihel.serv_cco.rel">
+            <field name="name">Contenedores</field>
+            <field name="precio">9064</field>
+        </record>
     </data>
 </odoo>
