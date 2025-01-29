@@ -72,19 +72,4 @@
   groups="elihel.group_elihel"
   action="elihel_cco_action" />
 
-<menuitem
-  id="elh_cobros_mes"
-  name="Cobros Mes"
-  parent="elihel_menu"
-  sequence="30"
-  groups="elihel.group_elihel"
-  action="action_cobros_mes_wizard"/>
-
-<record id="action_cobros_mes_wizard" model="ir.actions.act_window">
-    <field name="name">Cobros por Mes</field>
-    <field name="res_model">elihel.cobros.mes.wizard</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
-</record>
-
 </odoo>
