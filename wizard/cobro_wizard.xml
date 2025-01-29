@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
             <form>
                 <group>
-                
+                <field name="mes"/>
                 </group>
                 <br/>
                         <h4>Facturas vencidas</h4>
