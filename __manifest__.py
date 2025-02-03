@@ -8,10 +8,11 @@
 'application': "True",
 'version': "2.0",
 'data': ['security/groups.xml',
-         'security/ir.model.access.csv',
-         'views/menu.xml',
-         'views/elihel_trabajo.xml',
-         'data/servicios_data.xml',
+         'security/ir.model.access.csv', 
+         'data/servicios_data.xml',         
+         'views/barco_views.xml',
+         'views/camion_views.xml',
+         'views/servicio_views.xml',
          
 ],
 

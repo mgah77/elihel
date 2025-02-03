@@ -1,8 +1,4 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_elihel_main,access.elihel.main,model_elihel_main,group_elihel,1,1,1,1
-access_elihel_nave_rel,access.elihel.nave.rel,model_elihel_nave_rel,group_elihel,1,1,1,1
-access_elihel_serv_pmo_rel,access.elihel.serv.pmo.rel,model_elihel_serv_pmo_rel,group_elihel,1,1,1,1
-access_elihel_serv_cco_rel,access.elihel.serv.cco.rel,model_elihel_serv_cco_rel,group_elihel,1,1,1,1
-access_elihel_serv_mat_rel,access.elihel.serv.mat.rel,model_elihel_serv_mat_rel,group_elihel,1,1,1,1
-
-
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_elihel_barco","access_elihel_barco","model_elihel_barco","","1","1","1","1"
+"access_elihel_camion","access_elihel_camion","model_elihel_camion","","1","1","1","1"
+"access_elihel_servicio","access_elihel_servicio","model_elihel_servicio","","1","1","1","1"
