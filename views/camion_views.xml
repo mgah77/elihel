@@ -1,7 +1,7 @@
 <odoo>
     <record id="view_camion_tree" model="ir.ui.view">
-        <field name="name">mi_modulo.camion.tree</field>
-        <field name="model">mi_modulo.camion</field>
+        <field name="name">elihel.camion.tree</field>
+        <field name="model">elihel.camion</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -11,8 +11,8 @@
     </record>
 
     <record id="view_camion_form" model="ir.ui.view">
-        <field name="name">mi_modulo.camion.form</field>
-        <field name="model">mi_modulo.camion</field>
+        <field name="name">elihel.camion.form</field>
+        <field name="model">elihel.camion</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
