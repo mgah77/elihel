@@ -1,5 +1,11 @@
-
 <odoo>
+    <!-- Definir la acción para los barcos -->
+    <record id="action_barco" model="ir.actions.act_window">
+        <field name="name">Barcos</field>
+        <field name="res_model">elihel.barco</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <!-- Vista de árbol para Barco -->
     <record id="view_barco_tree" model="ir.ui.view">
         <field name="name">elihel.barco.tree</field>
@@ -54,10 +60,4 @@
     <!-- Menú y acción para Barco -->
     <menuitem id="menu_root" name="Servicios"/>
     <menuitem id="menu_barco" name="Barcos" parent="menu_root" action="action_barco"/>
-
-    <record id="action_barco" model="ir.actions.act_window">
-        <field name="name">Barcos</field>
-        <field name="res_model">elihel.barco</field>
-        <field name="view_mode">tree,form</field>
-    </record>
 </odoo>
