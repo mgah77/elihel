@@ -29,13 +29,15 @@
         </field>
     </record>
 
+    <record id="action_barco_info" model="ir.actions.act_window">
+        <field name="name">Información de Barcos</field>
+        <field name="res_model">elihel.barco_info</field>
+        <field name="view_mode">tree,form</field>    
+    </record>
+
     <!-- Menú y acción para BarcoInfo -->
     <menuitem id="menu_root" name="Servicios"/>
     <menuitem id="menu_barco_info" name="Información de Barcos" parent="menu_root" action="action_barco_info"/>
 
-    <record id="action_barco_info" model="ir.actions.act_window">
-        <field name="name">Información de Barcos</field>
-        <field name="res_model">elihel.barco_info</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+
 </odoo>
