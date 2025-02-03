@@ -1,16 +1,18 @@
 <odoo>
+    <!-- Vista de árbol para Servicio -->
     <record id="view_servicio_tree" model="ir.ui.view">
         <field name="name">elihel.servicio.tree</field>
         <field name="model">elihel.servicio</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="cantidad"/>
-                <field name="camion_id"/>
+                <field name="tipo_servicio"/>  <!-- Tipo de servicio -->
+                <field name="cantidad"/>  <!-- Cantidad del servicio -->
+                <field name="camion_id"/>  <!-- Camión asociado -->
             </tree>
         </field>
     </record>
 
+    <!-- Vista de formulario para Servicio -->
     <record id="view_servicio_form" model="ir.ui.view">
         <field name="name">elihel.servicio.form</field>
         <field name="model">elihel.servicio</field>
@@ -18,9 +20,9 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="cantidad"/>
-                        <field name="camion_id"/>
+                        <field name="tipo_servicio"/>  <!-- Tipo de servicio -->
+                        <field name="cantidad"/>  <!-- Cantidad del servicio -->
+                        <field name="camion_id"/>  <!-- Camión asociado -->
                     </group>
                 </sheet>
             </form>
