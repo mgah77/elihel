@@ -1,0 +1,41 @@
+<odoo>
+    <!-- Vista de árbol para BarcoInfo -->
+    <record id="view_barco_info_tree" model="ir.ui.view">
+        <field name="name">elihel.barco_info.tree</field>
+        <field name="model">elihel.barco_info</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nombre"/>  <!-- Nombre del barco -->
+                <field name="matricula"/>  <!-- Matrícula del barco -->
+                <field name="valor"/>  <!-- Valor del barco -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de formulario para BarcoInfo -->
+    <record id="view_barco_info_form" model="ir.ui.view">
+        <field name="name">elihel.barco_info.form</field>
+        <field name="model">elihel.barco_info</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="nombre"/>  <!-- Nombre del barco -->
+                        <field name="matricula"/>  <!-- Matrícula del barco -->
+                        <field name="valor"/>  <!-- Valor del barco -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menú y acción para BarcoInfo -->
+    <menuitem id="menu_root" name="Servicios"/>
+    <menuitem id="menu_barco_info" name="Información de Barcos" parent="menu_root" action="action_barco_info"/>
+
+    <record id="action_barco_info" model="ir.actions.act_window">
+        <field name="name">Información de Barcos</field>
+        <field name="res_model">elihel.barco_info</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
