@@ -6,8 +6,6 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="nombre"/>  <!-- Nombre del barco (relacionado) -->
-                <field name="matricula"/>  <!-- Matrícula del barco (relacionado) -->
-                <field name="valor"/>  <!-- Valor del barco (relacionado) -->
                 <field name="fecha_llegada"/>  <!-- Fecha de llegada del barco -->
             </tree>
         </field>
@@ -51,10 +49,11 @@
     </record>
 
     <!-- Menú y acción para Barco -->
-    <menuitem id="menu_barco" name="Barcos" parent="menu_root" action="action_barco"/>
+    <menuitem id="menu_root" name="Servicios"/>
+    <menuitem id="menu_barco" name="Trabajos" parent="menu_root" action="action_barco"/>
 
     <record id="action_barco" model="ir.actions.act_window">
-        <field name="name">Barcos</field>
+        <field name="name">Trabajos</field>
         <field name="res_model">elihel.barco</field>
         <field name="view_mode">tree,form</field>
     </record>
