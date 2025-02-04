@@ -12,7 +12,10 @@ class Camion(models.Model):
     @api.constrains('matricula')
     def _check_matricula(self):
         for record in self:
-            if len(record.matricula) != 6:
+            if record.matricula and len(record.matricula) != 6:
                 raise ValidationError("La matrícula debe tener exactamente 6 caracteres.")
-            # Convertir a mayúsculas
-            record.matricula = record.matricula.upper()
+
+    @api.onchange('matricula')
+    def _onchange_matricula(self):
+        if self.matricula:
+            self.matricula = self.matricula.upper()
