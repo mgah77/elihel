@@ -49,7 +49,7 @@
     </record>
 
     <!-- Menú y acción para Barco -->
-    <menuitem id="menu_root" name="Servicios"/>
+    <menuitem id="menu_root" name="Servicios" groups="elihel.group_elihel"/>
     <menuitem id="menu_barco" name="Trabajos" parent="menu_root" action="action_barco"/>
 
     <record id="action_barco" model="ir.actions.act_window">
