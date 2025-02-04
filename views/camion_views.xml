@@ -5,7 +5,7 @@
         <field name="model">elihel.camion</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="matricula"/>  <!-- Matrícula del camión -->
+                <field name="matricula" string="Matrícula del Camión"/>  <!-- Matrícula del camión con etiqueta clara -->
                 <field name="barco_id"/>  <!-- Barco asociado -->
             </tree>
         </field>
@@ -19,7 +19,7 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="matricula"/>  <!-- Matrícula del camión -->
+                        <field name="matricula" string="Matrícula del Camión"/>  <!-- Matrícula del camión con etiqueta clara -->
                         <field name="barco_id"/>  <!-- Barco asociado -->
                     </group>
                     <!-- Mostrar los servicios asociados al camión -->
