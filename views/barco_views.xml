@@ -21,7 +21,7 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="barco_info_id"/>  <!-- Información del barco (nombre, matrícula y valor) -->
+                        <field name="barco_info_id" widget="many2one"/>  <!-- Información del barco (nombre, matrícula y valor) -->
                         <field name="fecha_llegada"/>  <!-- Fecha de llegada del barco -->
                     </group>
                     <!-- Mostrar los camiones asociados al barco -->

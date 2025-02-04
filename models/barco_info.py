@@ -3,6 +3,7 @@ from odoo import models, fields
 class BarcoInfo(models.Model):
     _name = 'elihel.barco_info'
     _description = 'Información del Barco'
+    _rec_name = 'nombre'  # Define el campo 'nombre' como el nombre predeterminado
 
     nombre = fields.Char(string='Nombre del Barco', required=True)  # Nombre del barco
     matricula = fields.Char(string='Matrícula del Barco', required=True)  # Matrícula del barco
