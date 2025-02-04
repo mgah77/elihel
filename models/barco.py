@@ -3,6 +3,7 @@ from odoo import models, fields
 class Barco(models.Model):
     _name = 'elihel.barco'
     _description = 'Barco'
+    _rec_name = 'nombre'  # Define el campo 'nombre' como el nombre predeterminado
 
     barco_info_id = fields.Many2one('elihel.barco_info', string='Información del Barco', required=True)  # Relación con BarcoInfo
     fecha_llegada = fields.Datetime(string='Fecha de Llegada', default=fields.Datetime.now)  # Fecha de llegada
