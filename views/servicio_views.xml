@@ -22,7 +22,7 @@
                     <group>
                         <field name="tipo_servicio"/>  <!-- Tipo de servicio -->
                         <field name="cantidad"/>  <!-- Cantidad del servicio -->
-                        <field name="camion_id"/>  <!-- Camión asociado -->
+
                     </group>
                 </sheet>
             </form>
