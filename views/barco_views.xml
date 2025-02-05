@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="nombre"/>  <!-- Nombre del barco (relacionado) -->
+                <field name="lugar"/>  <!-- Lugar de trabajo -->
                 <field name="fecha_llegada"/>  <!-- Fecha  -->
             </tree>
         </field>
@@ -19,7 +20,7 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="lugar"/>  <!-- Lugar de llegada trabajo -->
+                        <field name="lugar"/>  <!-- Lugar de trabajo -->
                         <field name="barco_info_id" widget="many2one"/>  <!-- Información del barco (nombre, matrícula y valor) -->
                         <field name="fecha_llegada"/>  <!-- Fecha -->
                     </group>
