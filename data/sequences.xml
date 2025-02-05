@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Secuencia para trabajos en Puerto Montt -->
+    <record id="seq_puerto_montt" model="ir.sequence">
+        <field name="name">Secuencia de Certificados - Puerto Montt</field>
+        <field name="code">elihel.barco.puerto_montt</field>
+        <field name="prefix">PM-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Secuencia para trabajos en Chacabuco -->
+    <record id="seq_chacabuco" model="ir.sequence">
+        <field name="name">Secuencia de Certificados - Chacabuco</field>
+        <field name="code">elihel.barco.chacabuco</field>
+        <field name="prefix">CC-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>
