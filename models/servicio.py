@@ -5,7 +5,8 @@ class Servicio(models.Model):
     _description = 'Servicio'
     _rec_name = 'tipo_servicio'  # Define el campo 'tipo_servicio' como el nombre predeterminado
 
-    tipo_servicio = fields.Selection([
+    # Lista de tipos de servicios
+    TIPO_SERVICIO_SELECTION = [
         ('des', 'Desinfección'),
         ('rfr', 'Reffer'),
         ('eee', 'Estanque ensilaje y equipos'),
@@ -40,7 +41,14 @@ class Servicio(models.Model):
         ('ist', 'Isotanque'),
         ('cbu', 'Compresor Buceo'),
         ('rpe', 'Rejas Perimetrales'),
-        ('crm', 'Contenedores'),        
-    ], string='Tipo de Servicio', required=True)  # Tipo de servicio
+        ('crm', 'Contenedores'),   
+    ]
+
+    tipo_servicio = fields.Selection(
+        TIPO_SERVICIO_SELECTION,
+        string='Tipo de Servicio',
+        required=True
+    )  # Tipo de servicio
+
     cantidad = fields.Integer(string='Cantidad', required=True)  # Cantidad del servicio
     camion_id = fields.Many2one('elihel.camion', string='Camión', ondelete='cascade')  # Relación con el camión
