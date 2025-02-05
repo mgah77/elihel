@@ -5,6 +5,7 @@
         <field name="model">elihel.barco</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="numero_certificado"/> <!-- Número de certificado del barco -->
                 <field name="nombre"/>  <!-- Nombre del barco (relacionado) -->
                 <field name="lugar"/>  <!-- Lugar de trabajo -->
                 <field name="fecha_llegada"/>  <!-- Fecha  -->
