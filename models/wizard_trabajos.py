@@ -25,7 +25,7 @@ class WizardTrabajos(models.TransientModel):
         ('12', 'Diciembre'),
     ], string='Mes', required=True)  # Mes del trabajo
 
-    año = fields.Integer(
+    anno = fields.Integer(
         string='Año',
         default=lambda self: datetime.now().year,  # Año actual por defecto
         required=True,
@@ -37,20 +37,20 @@ class WizardTrabajos(models.TransientModel):
         string='Resultados',  # Etiqueta del campo
     )  # Lista de resultados
 
-    @api.onchange('lugar', 'mes', 'año')
-    def _onchange_lugar_mes_año(self):
+    @api.onchange('lugar', 'mes', 'anno')
+    def _onchange_lugar_mes_anno(self):
         # Limpiar resultados anteriores
         self.resultado_ids = [(5, 0, 0)]  # Eliminar todos los registros existentes
 
         # Verificar si se han seleccionado lugar, mes y año
-        if self.lugar and self.mes and self.año:
+        if self.lugar and self.mes and self.anno:
             # Obtener la fecha actual
             fecha_actual = datetime.now()
-            año_actual = fecha_actual.year
+            anno_actual = fecha_actual.year
             mes_actual = fecha_actual.month
 
             # Verificar que el año no sea futuro
-            if self.año > año_actual:
+            if self.anno > anno_actual:
                 return {
                     'warning': {
                         'title': 'Año inválido',
@@ -59,7 +59,7 @@ class WizardTrabajos(models.TransientModel):
                 }
 
             # Verificar que el mes no sea futuro dentro del año actual
-            if self.año == año_actual and int(self.mes) > mes_actual:
+            if self.anno == anno_actual and int(self.mes) > mes_actual:
                 return {
                     'warning': {
                         'title': 'Mes inválido',
@@ -70,8 +70,8 @@ class WizardTrabajos(models.TransientModel):
             # Filtrar los trabajos por lugar, mes y año
             trabajos = self.env['elihel.barco'].search([
                 ('lugar', '=', self.lugar),
-                ('fecha_llegada', '>=', f'{self.año}-{self.mes}-01'),
-                ('fecha_llegada', '<=', f'{self.año}-{self.mes}-31'),
+                ('fecha_llegada', '>=', f'{self.anno}-{self.mes}-01'),
+                ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-31'),
             ])
 
             # Crear registros en el modelo transitorio para mostrar los resultados
