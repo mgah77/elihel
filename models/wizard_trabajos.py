@@ -83,7 +83,7 @@ class WizardTrabajos(models.TransientModel):
                 # Generar filas para cada camión y sus servicios
                 for i, camion in enumerate(trabajo.camion_ids):
                     # Obtener los servicios del camión
-                    servicios_texto = "<br>".join([
+                    servicios_texto = ", ".join([
                         f"{tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)} ({servicio.cantidad})"
                         for servicio in camion.servicio_ids
                     ])
