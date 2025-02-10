@@ -3,8 +3,8 @@
     <record id="seq_puerto_montt" model="ir.sequence">
         <field name="name">Secuencia de Certificados - Puerto Montt</field>
         <field name="code">elihel.barco.puerto_montt</field>
-        <field name="prefix">PM-</field>
-        <field name="padding">4</field>
+        <field name="prefix"></field>
+        <field name="padding">5</field>
         <field name="company_id" eval="False"/>
     </record>
 
@@ -12,8 +12,8 @@
     <record id="seq_chacabuco" model="ir.sequence">
         <field name="name">Secuencia de Certificados - Chacabuco</field>
         <field name="code">elihel.barco.chacabuco</field>
-        <field name="prefix">CC-</field>
-        <field name="padding">4</field>
+        <field name="prefix"></field>
+        <field name="padding">5</field>
         <field name="company_id" eval="False"/>
     </record>
 </odoo>
