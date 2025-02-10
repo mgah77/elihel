@@ -1,6 +1,6 @@
 from odoo import models, fields, api
 from datetime import datetime
-import calendar  # Importamos el módulo calendar
+import calendar
 
 class WizardTrabajos(models.TransientModel):
     _name = 'elihel.wizard_trabajos'
@@ -9,65 +9,25 @@ class WizardTrabajos(models.TransientModel):
     lugar = fields.Selection([
         ('pue', 'Puerto Montt'),
         ('cco', 'Chacabuco'),
-    ], string='Lugar', required=True)  # Lugar de trabajo
+    ], string='Lugar', required=True)
 
     mes = fields.Selection([
-        ('1', 'Enero'),
-        ('2', 'Febrero'),
-        ('3', 'Marzo'),
-        ('4', 'Abril'),
-        ('5', 'Mayo'),
-        ('6', 'Junio'),
-        ('7', 'Julio'),
-        ('8', 'Agosto'),
-        ('9', 'Septiembre'),
-        ('10', 'Octubre'),
-        ('11', 'Noviembre'),
-        ('12', 'Diciembre'),
-    ], string='Mes', required=True)  # Mes del trabajo
+        ('1', 'Enero'), ('2', 'Febrero'), ('3', 'Marzo'), ('4', 'Abril'),
+        ('5', 'Mayo'), ('6', 'Junio'), ('7', 'Julio'), ('8', 'Agosto'),
+        ('9', 'Septiembre'), ('10', 'Octubre'), ('11', 'Noviembre'), ('12', 'Diciembre'),
+    ], string='Mes', required=True)
 
-    anno = fields.Integer(
-        string='Año',
-        default=lambda self: datetime.now().year,  # Año actual por defecto
-        required=True,
-    )  # Año del trabajo
+    anno = fields.Integer(string='Año', default=lambda self: datetime.now().year, required=True)
 
-    resultado_ids = fields.One2many(
-        'elihel.wizard_trabajos.resultado',  # Modelo relacionado
-        'wizard_id',  # Campo Many2one en el modelo relacionado
-        string='Resultados',  # Etiqueta del campo
-    )  # Lista de resultados
+    html_resultados = fields.Html(string='Resultados', readonly=True)  # Campo para almacenar el informe en HTML
 
     @api.onchange('lugar', 'mes', 'anno')
-    def _onchange_lugar_mes_anno(self):
+    def _onchange_filtrar_trabajos(self):
         # Limpiar resultados anteriores
-        self.resultado_ids = [(5, 0, 0)]  # Eliminar todos los registros existentes
+        self.html_resultados = ""
 
         # Verificar si se han seleccionado lugar, mes y año
         if self.lugar and self.mes and self.anno:
-            # Obtener la fecha actual
-            fecha_actual = datetime.now()
-            anno_actual = fecha_actual.year
-            mes_actual = fecha_actual.month
-
-            # Verificar que el año no sea futuro
-            if self.anno > anno_actual:
-                return {
-                    'warning': {
-                        'title': 'Año inválido',
-                        'message': 'No se puede seleccionar un año futuro.',
-                    }
-                }
-
-            # Verificar que el mes no sea futuro dentro del año actual
-            if self.anno == anno_actual and int(self.mes) > mes_actual:
-                return {
-                    'warning': {
-                        'title': 'Mes inválido',
-                        'message': 'No se puede seleccionar un mes futuro dentro del año actual.',
-                    }
-                }
-
             # Obtener el último día del mes seleccionado
             ultimo_dia_mes = calendar.monthrange(self.anno, int(self.mes))[1]
 
@@ -78,19 +38,67 @@ class WizardTrabajos(models.TransientModel):
                 ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
-            # Crear registros en el modelo transitorio para mostrar los resultados
+            # Generar el informe en HTML
+            html_content = """
+                <style>
+                    .informe {
+                        font-family: Arial, sans-serif;
+                        margin: 20px;
+                    }
+                    .informe h2 {
+                        color: #333;
+                    }
+                    .informe table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                    }
+                    .informe th, .informe td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                    }
+                    .informe th {
+                        background-color: #f2f2f2;
+                    }
+                </style>
+                <div class="informe">
+                    <h2>Informe de Trabajos</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Número de Certificado</th>
+                                <th>Fecha de Llegada</th>
+                                <th>Matrícula del Camión</th>
+                                <th>Servicios</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            """
+
             for trabajo in trabajos:
                 for camion in trabajo.camion_ids:
                     servicios = ", ".join([
                         f"{servicio.tipo_servicio} ({servicio.cantidad})"
                         for servicio in camion.servicio_ids
                     ])
-                    self.resultado_ids = [(0, 0, {
-                        'numero_certificado': trabajo.numero_certificado,
-                        'fecha_llegada': trabajo.fecha_llegada,
-                        'matricula_camion': camion.matricula,
-                        'servicios': servicios,
-                    })]
+                    html_content += f"""
+                        <tr>
+                            <td>{trabajo.numero_certificado}</td>
+                            <td>{trabajo.fecha_llegada}</td>
+                            <td>{camion.matricula}</td>
+                            <td>{servicios}</td>
+                        </tr>
+                    """
+
+            html_content += """
+                        </tbody>
+                    </table>
+                </div>
+            """
+
+            # Asignar el contenido HTML al campo
+            self.html_resultados = html_content
 
 class WizardTrabajosResultado(models.TransientModel):
     _name = 'elihel.wizard_trabajos.resultado'
@@ -101,7 +109,7 @@ class WizardTrabajosResultado(models.TransientModel):
         string='Wizard',  # Etiqueta del campo
     )  # Relación con el wizard
 
-    numero_certificado = fields.Char(string='Número de Certificado')  # Número de certificado
+    numero_certificado = fields.Char(string='Número de Certificado' )  # Número de certificado
     fecha_llegada = fields.Date(string='Fecha de Llegada')  # Fecha de llegada
     matricula_camion = fields.Char(string='Matrícula del Camión')  # Matrícula del camión
     servicios = fields.Text(string='Servicios')  # Lista de servicios
