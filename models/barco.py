@@ -6,7 +6,7 @@ class Barco(models.Model):
     _rec_name = 'nombre'  # Define el campo 'nombre' como el nombre predeterminado
 
     barco_info_id = fields.Many2one('elihel.barco_info', string='Información del Barco', required=True)  # Relación con BarcoInfo
-    fecha_llegada = fields.Datetime(string='Fecha', default=fields.Datetime.now)  # Fecha
+    fecha_llegada = fields.Date(string='Fecha', default=fields.Date.today)
     camion_ids = fields.One2many('elihel.camion', 'barco_id', string='Camiones')  # Camiones asociados
     lugar = fields.Selection([
         ('pue', 'Puerto Montt'),
