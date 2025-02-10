@@ -1,4 +1,12 @@
 <odoo>
+    <!-- Acción para abrir el Wizard -->
+    <record id="action_wizard_trabajos" model="ir.actions.act_window">
+        <field name="name">Filtrar Trabajos</field>
+        <field name="res_model">elihel.wizard_trabajos</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
     <!-- Vista de formulario para el Wizard -->
     <record id="view_wizard_trabajos_form" model="ir.ui.view">
         <field name="name">elihel.wizard_trabajos.form</field>
@@ -27,13 +35,7 @@
         </field>
     </record>
 
-    <!-- Acción para abrir el Wizard -->
-    <record id="action_wizard_trabajos" model="ir.actions.act_window">
-        <field name="name">Filtrar Trabajos</field>
-        <field name="res_model">elihel.wizard_trabajos</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
+
 
     <!-- Menú para abrir el Wizard -->
     <menuitem id="menu_wizard_trabajos" name="Filtrar Trabajos" parent="elihel_menu" action="action_wizard_trabajos"/>
