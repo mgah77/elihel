@@ -26,16 +26,21 @@
                         <h2>Detalle de Servicios</h2>
                     </div>
                     <group>
-                        <t t-if="resultado_ids">
                             <t t-foreach="resultado_ids" t-as="resultado">
                                 <div class="oe_subtitle">
                                     <h3>Certificado: <t t-esc="resultado.numero_certificado"/></h3>
                                     <p>Fecha de Llegada: <t t-esc="resultado.fecha_llegada"/></p>
                                     <p>Matrícula del Camión: <t t-esc="resultado.matricula_camion"/></p>
+                                    <p>Servicios:</p>
+                                    <ul>
+                                        <t t-foreach="resultado.servicios.split(', ')" t-as="servicio">
+                                            <li><t t-esc="servicio"/></li>
+                                        </t>
+                                    </ul>
                                 </div>
                                 <hr/>
                             </t>
-                        </t>
+                        
                     </group>
                     <footer>
                         <button string="Cerrar" class="btn-secondary" special="cancel"/>
