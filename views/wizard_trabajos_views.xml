@@ -41,9 +41,9 @@
                                 </div>
                                 <hr/>
                             </t>
-                            <t t-else>
-                                <p>No hay resultados para mostrar.</p>
-                            </t>
+                        </t>
+                        <t t-else="">
+                            <p>No hay resultados para mostrar.</p>
                         </t>
                     </group>
                     <footer>
