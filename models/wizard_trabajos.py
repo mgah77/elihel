@@ -48,10 +48,18 @@ class WizardTrabajos(models.TransientModel):
                     .informe h2 {
                         color: #333;
                     }
+                    .informe h3 {
+                        color: #555;
+                        margin-top: 20px;
+                    }
+                    .informe h4 {
+                        color: #777;
+                        margin-top: 15px;
+                    }
                     .informe table {
                         width: 100%;
                         border-collapse: collapse;
-                        margin-top: 20px;
+                        margin-top: 10px;
                     }
                     .informe th, .informe td {
                         border: 1px solid #ddd;
@@ -64,19 +72,22 @@ class WizardTrabajos(models.TransientModel):
                 </style>
                 <div class="informe">
                     <h2>Informe de Trabajos</h2>
+            """
+
+            for trabajo in trabajos:
+                html_content += f"""
+                    <h3>Trabajo: Certificado {trabajo.numero_certificado} - Fecha: {trabajo.fecha_llegada}</h3>
+                    <h4>Barco: {trabajo.nombre} (Matrícula: {trabajo.matricula})</h4>
                     <table>
                         <thead>
                             <tr>
-                                <th>Número de Certificado</th>
-                                <th>Fecha de Llegada</th>
-                                <th>Matrícula del Camión</th>
+                                <th>Camiones</th>
                                 <th>Servicios</th>
                             </tr>
                         </thead>
                         <tbody>
-            """
+                """
 
-            for trabajo in trabajos:
                 for camion in trabajo.camion_ids:
                     servicios = ", ".join([
                         f"{servicio.tipo_servicio} ({servicio.cantidad})"
@@ -84,16 +95,17 @@ class WizardTrabajos(models.TransientModel):
                     ])
                     html_content += f"""
                         <tr>
-                            <td>{trabajo.numero_certificado}</td>
-                            <td>{trabajo.fecha_llegada}</td>
                             <td>{camion.matricula}</td>
                             <td>{servicios}</td>
                         </tr>
                     """
 
-            html_content += """
+                html_content += """
                         </tbody>
                     </table>
+                """
+
+            html_content += """
                 </div>
             """
 
