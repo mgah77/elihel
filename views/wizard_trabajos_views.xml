@@ -32,15 +32,12 @@
                                     <h3>Certificado: <t t-esc="resultado.numero_certificado"/></h3>
                                     <p>Fecha de Llegada: <t t-esc="resultado.fecha_llegada"/></p>
                                     <p>Matrícula del Camión: <t t-esc="resultado.matricula_camion"/></p>
-                                    <p>Servicios:</p>
-                                    <ul>
-                                        <t t-foreach="resultado.servicios.split(', ')" t-as="servicio">
-                                            <li><t t-esc="servicio"/></li>
-                                        </t>
-                                    </ul>
                                 </div>
                                 <hr/>
                             </t>
+                        </t>
+                        <t t-if="not resultado_ids or len(resultado_ids) == 0">
+                            <p>No hay resultados para mostrar.</p>
                         </t>
                     </group>
                     <footer>
