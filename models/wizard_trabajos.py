@@ -69,7 +69,7 @@ class WizardTrabajos(models.TransientModel):
                 </style>
                 <div class="informe">
                     <h2>Informe de Trabajos</h2>
-                    <div class="fila encabezado">
+                    <div class="row">
                         <div class="columna">Certificado</div>
                         <div class="columna">Barco</div>
                         <div class="columna">Matrícula</div>
@@ -91,7 +91,7 @@ class WizardTrabajos(models.TransientModel):
                     # Si es el primer camión, mostrar los datos del trabajo
                     if i == 0:
                         html_content += f"""
-                            <div class="fila">
+                            <div class="row">
                                 <div class="columna">{trabajo.numero_certificado}</div>
                                 <div class="columna">{trabajo.nombre}</div>
                                 <div class="columna">{trabajo.matricula}</div>
@@ -103,7 +103,7 @@ class WizardTrabajos(models.TransientModel):
                     else:
                         # Para los camiones siguientes, dejar las primeras columnas vacías
                         html_content += f"""
-                            <div class="fila">
+                            <div class="row">
                                 <div class="columna"></div>
                                 <div class="columna"></div>
                                 <div class="columna"></div>
