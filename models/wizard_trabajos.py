@@ -66,22 +66,6 @@ class WizardTrabajos(models.TransientModel):
                     .informe th {
                         background-color: #f2f2f2;
                     }
-                    .informe ul {
-                        list-style-type: none;
-                        padding: 0;
-                        margin: 0;
-                    }
-                    .informe ul li {
-                        margin: 5px 0;
-                    }
-                    .informe .camiones-servicios {
-                        display: flex;
-                        align-items: flex-start;  /* Alinear las listas desde la parte superior */
-                    }
-                    .informe .camiones-servicios ul {
-                        flex: 1;
-                        margin-right: 10px;  /* Espacio entre las listas de camiones y servicios */
-                    }
                 </style>
                 <div class="informe">
                     <h2>Informe de Trabajos</h2>
@@ -100,21 +84,13 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
-                # Generar una lista de camiones y servicios para este trabajo
-                camiones_html = "<ul>"
-                servicios_html = "<ul>"
-
-                for camion in trabajo.camion_ids:
-                    camiones_html += f"<li>{camion.matricula}</li>"
-
-                    # Generar una lista de servicios para este camión
-                    for servicio in camion.servicio_ids:
-                        # Obtener la descripción del servicio desde el campo selection
-                        descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
-                        servicios_html += f"<li>{descripcion_servicio} ({servicio.cantidad})</li>"
-
-                camiones_html += "</ul>"
-                servicios_html += "</ul>"
+                # Generar texto para camiones y servicios
+                camiones_texto = "<br>".join([camion.matricula for camion in trabajo.camion_ids])
+                servicios_texto = "<br>".join([
+                    f"{tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)} ({servicio.cantidad})"
+                    for camion in trabajo.camion_ids
+                    for servicio in camion.servicio_ids
+                ])
 
                 html_content += f"""
                     <tr>
@@ -122,8 +98,8 @@ class WizardTrabajos(models.TransientModel):
                         <td>{trabajo.nombre}</td>
                         <td>{trabajo.matricula}</td>
                         <td>{trabajo.fecha_llegada}</td>
-                        <td>{camiones_html}</td>
-                        <td>{servicios_html}</td>
+                        <td>{camiones_texto}</td>
+                        <td>{servicios_texto}</td>
                     </tr>
                 """
 
