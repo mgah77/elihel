@@ -91,25 +91,32 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
+                # Generar una lista de camiones y servicios para este trabajo
+                camiones_html = "<ul>"
+                servicios_html = "<ul>"
+
                 for camion in trabajo.camion_ids:
-                    # Generar una lista HTML para los servicios
-                    servicios_html = "<ul>"
+                    camiones_html += f"<li>{camion.matricula}</li>"
+
+                    # Generar una lista de servicios para este camión
                     for servicio in camion.servicio_ids:
                         # Obtener la descripción del servicio desde el campo selection
                         descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
                         servicios_html += f"<li>{descripcion_servicio} ({servicio.cantidad})</li>"
-                    servicios_html += "</ul>"
 
-                    html_content += f"""
-                        <tr>
-                            <td>{trabajo.numero_certificado}</td>
-                            <td>{trabajo.nombre}</td>
-                            <td>{trabajo.matricula}</td>
-                            <td>{trabajo.fecha_llegada}</td>
-                            <td>{camion.matricula}</td>
-                            <td>{servicios_html}</td>
-                        </tr>
-                    """
+                camiones_html += "</ul>"
+                servicios_html += "</ul>"
+
+                html_content += f"""
+                    <tr>
+                        <td>{trabajo.numero_certificado}</td>
+                        <td>{trabajo.nombre}</td>
+                        <td>{trabajo.matricula}</td>
+                        <td>{trabajo.fecha_llegada}</td>
+                        <td>{camiones_html}</td>
+                        <td>{servicios_html}</td>
+                    </tr>
+                """
 
             html_content += """
                         </tbody>
