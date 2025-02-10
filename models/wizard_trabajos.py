@@ -61,6 +61,7 @@ class WizardTrabajos(models.TransientModel):
                         border: 1px solid #ddd;
                         padding: 8px;
                         text-align: left;
+                        vertical-align: top;  /* Alinear el contenido desde la parte superior */
                     }
                     .informe th {
                         background-color: #f2f2f2;
