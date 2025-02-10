@@ -69,6 +69,14 @@ class WizardTrabajos(models.TransientModel):
                     .informe th {
                         background-color: #f2f2f2;
                     }
+                    .informe ul {
+                        list-style-type: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    .informe ul li {
+                        margin: 5px 0;
+                    }
                 </style>
                 <div class="informe">
                     <h2>Informe de Trabajos</h2>
@@ -89,14 +97,16 @@ class WizardTrabajos(models.TransientModel):
                 """
 
                 for camion in trabajo.camion_ids:
-                    servicios = ", ".join([
-                        f"{servicio.tipo_servicio} ({servicio.cantidad})"
-                        for servicio in camion.servicio_ids
-                    ])
+                    # Generar una lista HTML para los servicios
+                    servicios_html = "<ul>"
+                    for servicio in camion.servicio_ids:
+                        servicios_html += f"<li>{servicio.tipo_servicio} ({servicio.cantidad})</li>"
+                    servicios_html += "</ul>"
+
                     html_content += f"""
                         <tr>
                             <td>{camion.matricula}</td>
-                            <td>{servicios}</td>
+                            <td>{servicios_html}</td>
                         </tr>
                     """
 
