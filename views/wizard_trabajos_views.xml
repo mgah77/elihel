@@ -36,7 +36,7 @@
                                 <hr/>
                             </t>
                         </t>
-                        <t t-if="not resultado_ids or len(resultado_ids) == 0">
+                        <t t-if="not resultado_ids or not len(resultado_ids)">
                             <p>No hay resultados para mostrar.</p>
                         </t>
                     </group>
