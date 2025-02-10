@@ -74,6 +74,14 @@ class WizardTrabajos(models.TransientModel):
                     .informe ul li {
                         margin: 5px 0;
                     }
+                    .informe .camiones-servicios {
+                        display: flex;
+                        align-items: flex-start;  /* Alinear las listas desde la parte superior */
+                    }
+                    .informe .camiones-servicios ul {
+                        flex: 1;
+                        margin-right: 10px;  /* Espacio entre las listas de camiones y servicios */
+                    }
                 </style>
                 <div class="informe">
                     <h2>Informe de Trabajos</h2>
