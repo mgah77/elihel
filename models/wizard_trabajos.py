@@ -38,15 +38,16 @@ class WizardTrabajos(models.TransientModel):
                 ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
+            # Obtener las descripciones de los servicios desde el modelo Servicio
+            servicio_model = self.env['elihel.servicio']
+            tipo_servicio_selection = dict(servicio_model._fields['tipo_servicio'].selection)
+
             # Generar el informe en HTML
             html_content = """
                 <style>
                     .informe {
                         font-family: Arial, sans-serif;
                         margin: 20px;
-                    }
-                    .informe h2 {
-                        color: #333;
                     }
                     .informe h3 {
                         color: #555;
@@ -79,7 +80,6 @@ class WizardTrabajos(models.TransientModel):
                     }
                 </style>
                 <div class="informe">
-                    <h2>Informe de Trabajos</h2>
             """
 
             for trabajo in trabajos:
@@ -100,7 +100,9 @@ class WizardTrabajos(models.TransientModel):
                     # Generar una lista HTML para los servicios
                     servicios_html = "<ul>"
                     for servicio in camion.servicio_ids:
-                        servicios_html += f"<li>{servicio.tipo_servicio} ({servicio.cantidad})</li>"
+                        # Obtener la descripción del servicio desde el campo selection
+                        descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
+                        servicios_html += f"<li>{descripcion_servicio} ({servicio.cantidad})</li>"
                     servicios_html += "</ul>"
 
                     html_content += f"""

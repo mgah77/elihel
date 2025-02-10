@@ -12,7 +12,7 @@
                         <field name="anno"/>  <!-- Año del trabajo -->
                     </group>
                     <div class="oe_title">
-                        <h2>Informe de Trabajos</h2>
+                        <h2>Informe de Trabajos</h2>  <!-- Título del informe -->
                     </div>
                     <field name="html_resultados" widget="html"/>  <!-- Mostrar el informe en HTML -->
                     <footer>
