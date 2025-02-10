@@ -42,9 +42,6 @@
                                 <hr/>
                             </t>
                         </t>
-                        <t t-else="">
-                            <p>No hay resultados para mostrar.</p>
-                        </t>
                     </group>
                     <footer>
                         <button string="Cerrar" class="btn-secondary" special="cancel"/>
