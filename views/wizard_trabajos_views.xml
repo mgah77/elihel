@@ -26,7 +26,7 @@
                         <h2>Detalle de Servicios</h2>
                     </div>
                     <group>
-                        <t t-if="resultado_ids and len(resultado_ids) > 0">
+                        <t t-if="resultado_ids">
                             <t t-foreach="resultado_ids" t-as="resultado">
                                 <div class="oe_subtitle">
                                     <h3>Certificado: <t t-esc="resultado.numero_certificado"/></h3>
@@ -36,7 +36,7 @@
                                 <hr/>
                             </t>
                         </t>
-                        <t t-if="not resultado_ids or not len(resultado_ids)">
+                        <t t-if="not resultado_ids">
                             <p>No hay resultados para mostrar.</p>
                         </t>
                     </group>
