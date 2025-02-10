@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from datetime import datetime
+import calendar  # Importamos el módulo calendar
 
 class WizardTrabajos(models.TransientModel):
     _name = 'elihel.wizard_trabajos'
@@ -67,11 +68,14 @@ class WizardTrabajos(models.TransientModel):
                     }
                 }
 
+            # Obtener el último día del mes seleccionado
+            ultimo_dia_mes = calendar.monthrange(self.anno, int(self.mes))[1]
+
             # Filtrar los trabajos por lugar, mes y año
             trabajos = self.env['elihel.barco'].search([
                 ('lugar', '=', self.lugar),
                 ('fecha_llegada', '>=', f'{self.anno}-{self.mes}-01'),
-                ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-31'),
+                ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
             # Crear registros en el modelo transitorio para mostrar los resultados
