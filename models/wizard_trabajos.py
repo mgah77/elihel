@@ -52,60 +52,68 @@ class WizardTrabajos(models.TransientModel):
                     .informe h2 {
                         color: #333;
                     }
-                    .informe table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin-top: 10px;
+                    .informe .fila {
+                        display: flex;
+                        border-bottom: 1px solid #ddd;
+                        padding: 8px 0;
                     }
-                    .informe th, .informe td {
-                        border: 1px solid #ddd;
-                        padding: 8px;
-                        text-align: left;
-                        vertical-align: top;  /* Alinear el contenido desde la parte superior */
+                    .informe .columna {
+                        flex: 1;
+                        padding: 0 10px;
                     }
-                    .informe th {
+                    .informe .encabezado {
+                        font-weight: bold;
                         background-color: #f2f2f2;
+                        border-bottom: 2px solid #ddd;
                     }
                 </style>
                 <div class="informe">
                     <h2>Informe de Trabajos</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Certificado</th>
-                                <th>Barco</th>
-                                <th>Matrícula</th>
-                                <th>Fecha</th>
-                                <th>Camiones</th>
-                                <th>Servicios</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="fila encabezado">
+                        <div class="columna">Certificado</div>
+                        <div class="columna">Barco</div>
+                        <div class="columna">Matrícula</div>
+                        <div class="columna">Fecha</div>
+                        <div class="columna">Camiones</div>
+                        <div class="columna">Servicios</div>
+                    </div>
             """
 
             for trabajo in trabajos:
-                # Generar texto para camiones y servicios
-                camiones_texto = "<br>".join([camion.matricula for camion in trabajo.camion_ids])
-                servicios_texto = "<br>".join([
-                    f"{tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)} ({servicio.cantidad})"
-                    for camion in trabajo.camion_ids
-                    for servicio in camion.servicio_ids
-                ])
+                # Generar filas para cada camión y sus servicios
+                for i, camion in enumerate(trabajo.camion_ids):
+                    # Obtener los servicios del camión
+                    servicios_texto = "<br>".join([
+                        f"{tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)} ({servicio.cantidad})"
+                        for servicio in camion.servicio_ids
+                    ])
 
-                html_content += f"""
-                    <tr>
-                        <td>{trabajo.numero_certificado}</td>
-                        <td>{trabajo.nombre}</td>
-                        <td>{trabajo.matricula}</td>
-                        <td>{trabajo.fecha_llegada}</td>
-                        <td>{camiones_texto}</td>
-                        <td>{servicios_texto}</td>
-                    </tr>
-                """
+                    # Si es el primer camión, mostrar los datos del trabajo
+                    if i == 0:
+                        html_content += f"""
+                            <div class="fila">
+                                <div class="columna">{trabajo.numero_certificado}</div>
+                                <div class="columna">{trabajo.nombre}</div>
+                                <div class="columna">{trabajo.matricula}</div>
+                                <div class="columna">{trabajo.fecha_llegada}</div>
+                                <div class="columna">{camion.matricula}</div>
+                                <div class="columna">{servicios_texto}</div>
+                            </div>
+                        """
+                    else:
+                        # Para los camiones siguientes, dejar las primeras columnas vacías
+                        html_content += f"""
+                            <div class="fila">
+                                <div class="columna"></div>
+                                <div class="columna"></div>
+                                <div class="columna"></div>
+                                <div class="columna"></div>
+                                <div class="columna">{camion.matricula}</div>
+                                <div class="columna">{servicios_texto}</div>
+                            </div>
+                        """
 
             html_content += """
-                        </tbody>
-                    </table>
                 </div>
             """
 
