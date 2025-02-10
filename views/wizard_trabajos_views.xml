@@ -11,14 +11,36 @@
                         <field name="mes"/>  <!-- Mes del trabajo -->
                         <field name="anno"/>  <!-- Año del trabajo -->
                     </group>
+                    <div class="oe_title">
+                        <h2>Trabajos Filtrados</h2>
+                    </div>
                     <field name="resultado_ids">
-                        <tree>
+                        <tree editable="bottom">
                             <field name="numero_certificado"/>  <!-- Número de certificado -->
                             <field name="fecha_llegada"/>  <!-- Fecha de llegada -->
                             <field name="matricula_camion"/>  <!-- Matrícula del camión -->
                             <field name="servicios"/>  <!-- Lista de servicios -->
                         </tree>
                     </field>
+                    <div class="oe_title">
+                        <h2>Detalle de Servicios</h2>
+                    </div>
+                    <group>
+                        <t t-foreach="resultado_ids" t-as="resultado">
+                            <div class="oe_subtitle">
+                                <h3>Certificado: <t t-esc="resultado.numero_certificado"/></h3>
+                                <p>Fecha de Llegada: <t t-esc="resultado.fecha_llegada"/></p>
+                                <p>Matrícula del Camión: <t t-esc="resultado.matricula_camion"/></p>
+                                <p>Servicios:</p>
+                                <ul>
+                                    <t t-foreach="resultado.servicios.split(', ')" t-as="servicio">
+                                        <li><t t-esc="servicio"/></li>
+                                    </t>
+                                </ul>
+                            </div>
+                            <hr/>
+                        </t>
+                    </group>
                     <footer>
                         <button string="Cerrar" class="btn-secondary" special="cancel"/>
                     </footer>
