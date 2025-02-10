@@ -60,7 +60,6 @@ class WizardTrabajos(models.TransientModel):
                     .informe .columna {
                         flex: 1;
                         padding: 0 10px;
-                        white-space: nowrap;  /* Evitar saltos de línea */
                     }
                     .informe .encabezado {
                         font-weight: bold;
