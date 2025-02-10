@@ -14,6 +14,7 @@
          'views/barco_views.xml',
          'views/camion_views.xml',
          'views/servicio_views.xml',
+         'views/wizard_trabajos_views.xml',  # Vistas para el Wizard
         
 ],
 
