@@ -76,21 +76,20 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
-                total_filas_trabajo = sum(max(len(camion.servicio_ids), 1) for camion in trabajo.camion_ids)
                 primera_fila_trabajo = True
                 for camion in trabajo.camion_ids:
                     primera_fila_camion = True
-                    for servicio in camion.servicio_ids or [None]:
+                    for i, servicio in enumerate(camion.servicio_ids or [None]):
                         html_content += "<tr>"
-                        if primera_fila_trabajo:
+                        if primera_fila_trabajo and primera_fila_camion and i == 0:
                             html_content += f"""
-                                <td rowspan="{total_filas_trabajo}">{trabajo.numero_certificado}</td>
-                                <td rowspan="{total_filas_trabajo}">{trabajo.nombre}</td>
-                                <td rowspan="{total_filas_trabajo}">{trabajo.matricula}</td>
-                                <td rowspan="{total_filas_trabajo}">{trabajo.fecha_llegada}</td>
+                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.numero_certificado}</td>
+                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.nombre}</td>
+                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.matricula}</td>
+                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.fecha_llegada}</td>
                             """
                             primera_fila_trabajo = False
-                        if primera_fila_camion:
+                        if primera_fila_camion and i == 0:
                             html_content += f"<td rowspan='{max(len(camion.servicio_ids), 1)}'>{camion.matricula}</td>"
                             primera_fila_camion = False
                         if servicio:
