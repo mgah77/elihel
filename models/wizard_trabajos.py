@@ -76,10 +76,12 @@ class WizardTrabajos(models.TransientModel):
                         <tbody>
             """
 
+
             for trabajo in trabajos:
-                filas_generadas = 0
+                # Obtener el número total de servicios en todos los camiones del trabajo
                 total_servicios = sum(len(camion.servicio_ids) for camion in trabajo.camion_ids)
 
+                # Generar la primera fila del trabajo con la información común
                 html_content += f"""
                     <tr>
                         <td rowspan="{total_servicios}">{trabajo.numero_certificado}</td>
@@ -88,25 +90,32 @@ class WizardTrabajos(models.TransientModel):
                         <td rowspan="{total_servicios}">{trabajo.fecha_llegada}</td>
                 """
 
+                # Iterar sobre los camiones del trabajo
                 for camion in trabajo.camion_ids:
+                    # Iterar sobre los servicios del camión
                     for i, servicio in enumerate(camion.servicio_ids):
+                        # Obtener la descripción del servicio desde el campo selection
                         descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
 
-                        if filas_generadas == 0:
+                        # Si es la primera fila del trabajo, mostrar el primer camión
+                        if i == 0 and camion == trabajo.camion_ids[0]:
                             html_content += f"""
-                                <td>{camion.matricula}</td>
+                                <td>{camion.nombre}</td>
                                 <td>{descripcion_servicio} ({servicio.cantidad})</td>
-                            </tr>
+                                </tr>
                             """
                         else:
+                            # Si no es la primera fila, solo mostrar el servicio
                             html_content += f"""
                                 <tr>
-                                    <td></td>
+                                    <td></td> <!-- Certificado vacío -->
+                                    <td></td> <!-- Barco vacío -->
+                                    <td></td> <!-- Matrícula vacía -->
+                                    <td></td> <!-- Fecha vacía -->
+                                    <td>{camion.nombre if i == 0 else ''}</td> <!-- Nombre del camión solo en la primera fila -->
                                     <td>{descripcion_servicio} ({servicio.cantidad})</td>
                                 </tr>
                             """
-                        filas_generadas += 1
-
             html_content += """
                         </tbody>
                     </table>
