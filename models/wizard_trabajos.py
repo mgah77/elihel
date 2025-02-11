@@ -18,7 +18,6 @@ class WizardTrabajos(models.TransientModel):
     ], string='Mes', required=True)
 
     anno = fields.Integer(string='Año', default=lambda self: datetime.now().year, required=True)
-
     html_resultados = fields.Html(string='Resultados', readonly=True)
 
     @api.onchange('lugar', 'mes', 'anno')
@@ -77,22 +76,28 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
-                for camion_index, camion in enumerate(trabajo.camion_ids):
-                    for servicio_index, servicio in enumerate(camion.servicio_ids):
-                        descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
-
+                total_filas_trabajo = sum(max(len(camion.servicio_ids), 1) for camion in trabajo.camion_ids)
+                primera_fila = True
+                for camion in trabajo.camion_ids:
+                    primera_fila_camion = True
+                    for servicio in camion.servicio_ids or [None]:
                         html_content += "<tr>"
-
-                        if camion_index == 0 and servicio_index == 0:
+                        if primera_fila:
                             html_content += f"""
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.numero_certificado}</td>
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.nombre}</td>
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.matricula}</td>
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.fecha_llegada}</td>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.numero_certificado}</td>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.nombre}</td>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.matricula}</td>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.fecha_llegada}</td>
                             """
-                        if servicio_index == 0:
-                            html_content += f"<td rowspan="{len(camion.servicio_ids)}">{camion.matricula}</td>"
-                        html_content += f"<td>{descripcion_servicio} ({servicio.cantidad})</td>"
+                            primera_fila = False
+                        if primera_fila_camion:
+                            html_content += f"<td rowspan="{max(len(camion.servicio_ids), 1)}">{camion.matricula}</td>"
+                            primera_fila_camion = False
+                        if servicio:
+                            descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
+                            html_content += f"<td>{descripcion_servicio} ({servicio.cantidad})</td>"
+                        else:
+                            html_content += "<td></td>"
                         html_content += "</tr>"
 
             html_content += """
