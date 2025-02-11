@@ -76,25 +76,46 @@ class WizardTrabajos(models.TransientModel):
                         <tbody>
             """
 
+
             for trabajo in trabajos:
-                for camion_index, camion in enumerate(trabajo.camion_ids):
-                    for servicio_index, servicio in enumerate(camion.servicio_ids):
+                # Obtener el número total de servicios en todos los camiones del trabajo
+                total_servicios = sum(len(camion.servicio_ids) for camion in trabajo.camion_ids)
+
+                # Generar la primera fila del trabajo con la información común
+                html_content += f"""
+                    <tr>
+                        <td rowspan="{total_servicios}">{trabajo.numero_certificado}</td>
+                        <td rowspan="{total_servicios}">{trabajo.nombre}</td>
+                        <td rowspan="{total_servicios}">{trabajo.matricula}</td>
+                        <td rowspan="{total_servicios}">{trabajo.fecha_llegada}</td>
+                """
+
+                # Iterar sobre los camiones del trabajo
+                for camion in trabajo.camion_ids:
+                    # Iterar sobre los servicios del camión
+                    for i, servicio in enumerate(camion.servicio_ids):
+                        # Obtener la descripción del servicio desde el campo selection
                         descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
 
-                        html_content += "<tr>"
-
-                        if camion_index == 0 and servicio_index == 0:
+                        # Si es la primera fila del trabajo, mostrar el primer camión
+                        if i == 0 and camion == trabajo.camion_ids[0]:
                             html_content += f"""
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.numero_certificado}</td>
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.nombre}</td>
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.matricula}</td>
-                                <td rowspan="{len(trabajo.camion_ids) * max(len(c.servicio_ids), 1) for c in trabajo.camion_ids}">{trabajo.fecha_llegada}</td>
+                                <td>{camion.matricula}</td>
+                                <td>{descripcion_servicio} ({servicio.cantidad})</td>
+                                </tr>
                             """
-                        if servicio_index == 0:
-                            html_content += f"<td rowspan="{len(camion.servicio_ids)}">{camion.matricula}</td>"
-                        html_content += f"<td>{descripcion_servicio} ({servicio.cantidad})</td>"
-                        html_content += "</tr>"
-
+                        else:
+                            # Si no es la primera fila, solo mostrar el servicio
+                            html_content += f"""
+                                <tr>
+                                    <td></td> <!-- Certificado vacío -->
+                                    <td></td> <!-- Barco vacío -->
+                                    <td></td> <!-- Matrícula vacía -->
+                                    <td></td> <!-- Fecha vacía -->
+                                    <td>{camion.matricula if i == 0 else ''}</td> <!-- Nombre del camión solo en la primera fila -->
+                                    <td>{descripcion_servicio} ({servicio.cantidad})</td>
+                                </tr>
+                            """
             html_content += """
                         </tbody>
                     </table>
