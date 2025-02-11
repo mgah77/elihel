@@ -18,7 +18,6 @@ class WizardTrabajos(models.TransientModel):
     ], string='Mes', required=True)
 
     anno = fields.Integer(string='Año', default=lambda self: datetime.now().year, required=True)
-
     html_resultados = fields.Html(string='Resultados', readonly=True)
 
     @api.onchange('lugar', 'mes', 'anno')
@@ -76,46 +75,31 @@ class WizardTrabajos(models.TransientModel):
                         <tbody>
             """
 
-
             for trabajo in trabajos:
-                # Obtener el número total de servicios en todos los camiones del trabajo
-                total_servicios = sum(len(camion.servicio_ids) for camion in trabajo.camion_ids)
-
-                # Generar la primera fila del trabajo con la información común
-                html_content += f"""
-                    <tr>
-                        <td rowspan="{total_servicios}">{trabajo.numero_certificado}</td>
-                        <td rowspan="{total_servicios}">{trabajo.nombre}</td>
-                        <td rowspan="{total_servicios}">{trabajo.matricula}</td>
-                        <td rowspan="{total_servicios}">{trabajo.fecha_llegada}</td>
-                """
-
-                # Iterar sobre los camiones del trabajo
+                total_filas_trabajo = sum(max(len(camion.servicio_ids), 1) for camion in trabajo.camion_ids)
+                primera_fila = True
                 for camion in trabajo.camion_ids:
-                    # Iterar sobre los servicios del camión
-                    for i, servicio in enumerate(camion.servicio_ids):
-                        # Obtener la descripción del servicio desde el campo selection
-                        descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
-
-                        # Si es la primera fila del trabajo, mostrar el primer camión
-                        if i == 0 and camion == trabajo.camion_ids[0]:
+                    primera_fila_camion = True
+                    for servicio in camion.servicio_ids or [None]:
+                        html_content += "<tr>"
+                        if primera_fila:
                             html_content += f"""
-                                <td>{camion.matricula}</td>
-                                <td>{descripcion_servicio} ({servicio.cantidad})</td>
-                                </tr>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.numero_certificado}</td>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.nombre}</td>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.matricula}</td>
+                                <td rowspan="{total_filas_trabajo}">{trabajo.fecha_llegada}</td>
                             """
+                            primera_fila = False
+                        if primera_fila_camion:
+                            html_content += f"<td rowspan='{max(len(camion.servicio_ids), 1)}'>{camion.matricula}</td>"
+                            primera_fila_camion = False
+                        if servicio:
+                            descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
+                            html_content += f"<td>{descripcion_servicio} ({servicio.cantidad})</td>"
                         else:
-                            # Si no es la primera fila, solo mostrar el servicio
-                            html_content += f"""
-                                <tr>
-                                    <td></td> <!-- Certificado vacío -->
-                                    <td></td> <!-- Barco vacío -->
-                                    <td></td> <!-- Matrícula vacía -->
-                                    <td></td> <!-- Fecha vacía -->
-                                    <td>{camion.matricula if i == 0 else ''}</td> <!-- Nombre del camión solo en la primera fila -->
-                                    <td>{descripcion_servicio} ({servicio.cantidad})</td>
-                                </tr>
-                            """
+                            html_content += "<td></td>"
+                        html_content += "</tr>"
+
             html_content += """
                         </tbody>
                     </table>
