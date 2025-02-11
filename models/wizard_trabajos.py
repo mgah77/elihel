@@ -77,19 +77,19 @@ class WizardTrabajos(models.TransientModel):
 
             for trabajo in trabajos:
                 total_filas_trabajo = sum(max(len(camion.servicio_ids), 1) for camion in trabajo.camion_ids)
-                primera_fila = True
+                primera_fila_trabajo = True
                 for camion in trabajo.camion_ids:
                     primera_fila_camion = True
                     for servicio in camion.servicio_ids or [None]:
                         html_content += "<tr>"
-                        if primera_fila:
+                        if primera_fila_trabajo:
                             html_content += f"""
                                 <td rowspan="{total_filas_trabajo}">{trabajo.numero_certificado}</td>
                                 <td rowspan="{total_filas_trabajo}">{trabajo.nombre}</td>
                                 <td rowspan="{total_filas_trabajo}">{trabajo.matricula}</td>
                                 <td rowspan="{total_filas_trabajo}">{trabajo.fecha_llegada}</td>
                             """
-                            primera_fila = False
+                            primera_fila_trabajo = False
                         if primera_fila_camion:
                             html_content += f"<td rowspan='{max(len(camion.servicio_ids), 1)}'>{camion.matricula}</td>"
                             primera_fila_camion = False
