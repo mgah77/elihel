@@ -91,39 +91,49 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
-                # Generar una lista de camiones y servicios para este trabajo
-                camiones_html = "<ul>"
-                servicios_html = "<ul>"
+                # Contador para saber cuántas filas se han generado para este trabajo
+                filas_generadas = 0
 
-                for camion in trabajo.camion_ids:
-                    camiones_html += f"<li>{camion.matricula}</li>"
+                # Obtener el número total de servicios en todos los camiones del trabajo
+                total_servicios = sum(len(camion.servicio_ids) for camion in trabajo.camion_ids)
 
-                    # Generar una lista de servicios para este camión
-                    for servicio in camion.servicio_ids:
-                        # Obtener la descripción del servicio desde el campo selection
-                        descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
-                        servicios_html += f"<li>{descripcion_servicio} ({servicio.cantidad})</li>"
-
-                camiones_html += "</ul>"
-                servicios_html += "</ul>"
-
+                # Generar la primera fila del trabajo con la información común
                 html_content += f"""
                     <tr>
-                        <td>{trabajo.numero_certificado}</td>
-                        <td>{trabajo.nombre}</td>
-                        <td>{trabajo.matricula}</td>
-                        <td>{trabajo.fecha_llegada}</td>
-                        <td>{camiones_html}</td>
-                        <td>{servicios_html}</td>
-                    </tr>
+                        <td rowspan="{total_servicios}">{trabajo.numero_certificado}</td>
+                        <td rowspan="{total_servicios}">{trabajo.nombre}</td>
+                        <td rowspan="{total_servicios}">{trabajo.matricula}</td>
+                        <td rowspan="{total_servicios}">{trabajo.fecha_llegada}</td>
                 """
 
-            html_content += """
-                        </tbody>
+                # Iterar sobre los camiones del trabajo
+                for camion in trabajo.camion_ids:
+                    # Iterar sobre los servicios del camión
+                    for i, servicio in enumerate(camion.servicio_ids):
+                        # Obtener la descripción del servicio desde el campo selection
+                        descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
+
+                        # Si es la primera fila del trabajo, mostrar el primer camión
+                        if filas_generadas == 0:
+                            html_content += f"""
+                                <td>{camion.nombre}</td>
+                                <td>{descripcion_servicio} ({servicio.cantidad})</td>
+                                </tr>
+                            """
+                        else:
+                            # Si no es la primera fila, solo mostrar el servicio
+                            html_content += f"""
+                                <tr>
+                                    <td></td> <!-- Columna de camión vacía -->
+                                    <td>{descripcion_servicio} ({servicio.cantidad})</td>
+                                </tr>
+                            """
+                        filas_generadas += 1
+
+            html_content += "</tbody>"
                     </table>
                 </div>
-            """
-
+            
             # Asignar el contenido HTML al campo
             self.html_resultados = html_content
 
