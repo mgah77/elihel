@@ -94,7 +94,7 @@ class WizardTrabajos(models.TransientModel):
 
                         if filas_generadas == 0:
                             html_content += f"""
-                                <td>{camion.nombre}</td>
+                                <td>{camion.matricula}</td>
                                 <td>{descripcion_servicio} ({servicio.cantidad})</td>
                             </tr>
                             """
