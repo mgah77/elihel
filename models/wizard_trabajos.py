@@ -112,7 +112,7 @@ class WizardTrabajos(models.TransientModel):
                                     <td></td> <!-- Barco vacío -->
                                     <td></td> <!-- Matrícula vacía -->
                                     <td></td> <!-- Fecha vacía -->
-                                    <td>{camion.nombre if i == 0 else ''}</td> <!-- Nombre del camión solo en la primera fila -->
+                                    <td>{camion.matricula if i == 0 else ''}</td> <!-- Nombre del camión solo en la primera fila -->
                                     <td>{descripcion_servicio} ({servicio.cantidad})</td>
                                 </tr>
                             """
