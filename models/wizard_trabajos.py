@@ -19,30 +19,24 @@ class WizardTrabajos(models.TransientModel):
 
     anno = fields.Integer(string='Año', default=lambda self: datetime.now().year, required=True)
 
-    html_resultados = fields.Html(string='Resultados', readonly=True)  # Campo para almacenar el informe en HTML
+    html_resultados = fields.Html(string='Resultados', readonly=True)
 
     @api.onchange('lugar', 'mes', 'anno')
     def _onchange_filtrar_trabajos(self):
-        # Limpiar resultados anteriores
         self.html_resultados = ""
 
-        # Verificar si se han seleccionado lugar, mes y año
         if self.lugar and self.mes and self.anno:
-            # Obtener el último día del mes seleccionado
             ultimo_dia_mes = calendar.monthrange(self.anno, int(self.mes))[1]
 
-            # Filtrar los trabajos por lugar, mes y año
             trabajos = self.env['elihel.barco'].search([
                 ('lugar', '=', self.lugar),
                 ('fecha_llegada', '>=', f'{self.anno}-{self.mes}-01'),
                 ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
-            # Obtener las descripciones de los servicios desde el modelo Servicio
             servicio_model = self.env['elihel.servicio']
             tipo_servicio_selection = dict(servicio_model._fields['tipo_servicio'].selection)
 
-            # Generar el informe en HTML
             html_content = """
                 <style>
                     .informe {
@@ -65,14 +59,6 @@ class WizardTrabajos(models.TransientModel):
                     .informe th {
                         background-color: #f2f2f2;
                     }
-                    .informe ul {
-                        list-style-type: none;
-                        padding: 0;
-                        margin: 0;
-                    }
-                    .informe ul li {
-                        margin: 5px 0;
-                    }
                 </style>
                 <div class="informe">
                     <h2>Informe de Trabajos</h2>
@@ -91,13 +77,9 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
-                # Contador para saber cuántas filas se han generado para este trabajo
                 filas_generadas = 0
-
-                # Obtener el número total de servicios en todos los camiones del trabajo
                 total_servicios = sum(len(camion.servicio_ids) for camion in trabajo.camion_ids)
 
-                # Generar la primera fila del trabajo con la información común
                 html_content += f"""
                     <tr>
                         <td rowspan="{total_servicios}">{trabajo.numero_certificado}</td>
@@ -106,35 +88,30 @@ class WizardTrabajos(models.TransientModel):
                         <td rowspan="{total_servicios}">{trabajo.fecha_llegada}</td>
                 """
 
-                # Iterar sobre los camiones del trabajo
                 for camion in trabajo.camion_ids:
-                    # Iterar sobre los servicios del camión
                     for i, servicio in enumerate(camion.servicio_ids):
-                        # Obtener la descripción del servicio desde el campo selection
                         descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
 
-                        # Si es la primera fila del trabajo, mostrar el primer camión
                         if filas_generadas == 0:
                             html_content += f"""
                                 <td>{camion.nombre}</td>
                                 <td>{descripcion_servicio} ({servicio.cantidad})</td>
-                                </tr>
+                            </tr>
                             """
                         else:
-                            # Si no es la primera fila, solo mostrar el servicio
                             html_content += f"""
                                 <tr>
-                                    <td></td> <!-- Columna de camión vacía -->
+                                    <td></td>
                                     <td>{descripcion_servicio} ({servicio.cantidad})</td>
                                 </tr>
                             """
                         filas_generadas += 1
 
-            html_content += "</tbody>"
+            html_content += """
+                        </tbody>
                     </table>
                 </div>
-            
-            # Asignar el contenido HTML al campo
+            """
             self.html_resultados = html_content
 
 class WizardTrabajosResultado(models.TransientModel):
