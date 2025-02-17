@@ -33,9 +33,6 @@ class WizardTrabajos(models.TransientModel):
                 ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
-            servicio_model = self.env['elihel.servicio']
-            tipo_servicio_selection = dict(servicio_model._fields['tipo_servicio'].selection)
-
             html_content = """
                 <style>
                     .informe {
@@ -69,7 +66,7 @@ class WizardTrabajos(models.TransientModel):
                                 <th>Matrícula</th>
                                 <th>Fecha</th>
                                 <th>Camiones</th>
-                                <th>Servicios</th>
+                                <th>Cantidad de Servicios</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,26 +75,21 @@ class WizardTrabajos(models.TransientModel):
             for trabajo in trabajos:
                 primera_fila_trabajo = True
                 for camion in trabajo.camion_ids:
-                    primera_fila_camion = True
-                    for i, servicio in enumerate(camion.servicio_ids or [None]):
-                        html_content += "<tr>"
-                        if primera_fila_trabajo and primera_fila_camion and i == 0:
-                            html_content += f"""
-                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.numero_certificado}</td>
-                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.nombre}</td>
-                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.matricula}</td>
-                                <td rowspan="{sum(max(len(c.servicio_ids), 1) for c in trabajo.camion_ids)}">{trabajo.fecha_llegada}</td>
-                            """
-                            primera_fila_trabajo = False
-                        if primera_fila_camion and i == 0:
-                            html_content += f"<td rowspan='{max(len(camion.servicio_ids), 1)}'>{camion.matricula}</td>"
-                            primera_fila_camion = False
-                        if servicio:
-                            descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
-                            html_content += f"<td>{descripcion_servicio} ({servicio.cantidad})</td>"
-                        else:
-                            html_content += "<td></td>"
-                        html_content += "</tr>"
+                    cantidad_servicios = len(camion.servicio_ids)
+                    html_content += "<tr>"
+                    if primera_fila_trabajo:
+                        html_content += f"""
+                            <td rowspan="{len(trabajo.camion_ids)}">{trabajo.numero_certificado}</td>
+                            <td rowspan="{len(trabajo.camion_ids)}">{trabajo.nombre}</td>
+                            <td rowspan="{len(trabajo.camion_ids)}">{trabajo.matricula}</td>
+                            <td rowspan="{len(trabajo.camion_ids)}">{trabajo.fecha_llegada}</td>
+                        """
+                        primera_fila_trabajo = False
+                    html_content += f"""
+                        <td>{camion.matricula}</td>
+                        <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                    """
+                    html_content += "</tr>"
 
             html_content += """
                         </tbody>
@@ -115,7 +107,7 @@ class WizardTrabajosResultado(models.TransientModel):
         string='Wizard',  # Etiqueta del campo
     )  # Relación con el wizard
 
-    numero_certificado = fields.Char(string='Número de Certificado' )  # Número de certificado
+    numero_certificado = fields.Char(string='Número de Certificado')  # Número de certificado
     fecha_llegada = fields.Date(string='Fecha de Llegada')  # Fecha de llegada
     matricula_camion = fields.Char(string='Matrícula del Camión')  # Matrícula del camión
     servicios = fields.Text(string='Servicios')  # Lista de servicios
