@@ -22,6 +22,7 @@ class WizardTrabajos(models.TransientModel):
 
     @api.onchange('lugar', 'mes', 'anno')
     def _onchange_filtrar_trabajos(self):
+        # Reiniciar el contenido HTML
         self.html_resultados = ""
 
         if self.lugar and self.mes and self.anno:
@@ -33,6 +34,7 @@ class WizardTrabajos(models.TransientModel):
                 ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
+            # Generar el contenido HTML
             html_content = """
                 <style>
                     .informe {
@@ -80,7 +82,7 @@ class WizardTrabajos(models.TransientModel):
                         <td>{trabajo.nombre}</td>
                         <td>{trabajo.matricula}</td>
                         <td>{trabajo.fecha_llegada}</td>
-                """    
+                """
                 for camion in trabajo.camion_ids:
                     cantidad_servicios = len(camion.servicio_ids)
                     if fila == 1:
@@ -102,15 +104,13 @@ class WizardTrabajos(models.TransientModel):
                             </tr>
                         """
 
-
-                    
-
-
             html_content += """
                         </tbody>
                     </table>
                 </div>
             """
+
+            # Asignar el contenido HTML al campo html_resultados
             self.html_resultados = html_content
 
 class WizardTrabajosResultado(models.TransientModel):
