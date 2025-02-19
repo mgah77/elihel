@@ -23,6 +23,7 @@ class WizardTrabajos(models.TransientModel):
     @api.onchange('lugar', 'mes', 'anno')
     def _onchange_filtrar_trabajos(self):
         # Reiniciar el contenido HTML correctamente
+        html_content = ""
         self.html_resultados = ""
 
         if self.lugar and self.mes and self.anno:
