@@ -1,3 +1,6 @@
+import base64
+import xlwt
+from io import BytesIO
 from odoo import models, fields, api
 from datetime import datetime
 import calendar
