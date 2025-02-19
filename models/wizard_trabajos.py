@@ -73,6 +73,7 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
+                fila = 1
                 html_content += f"""
                     <tr>
                         <td>{trabajo.numero_certificado}</td>
@@ -82,11 +83,27 @@ class WizardTrabajos(models.TransientModel):
                 """    
                 for camion in trabajo.camion_ids:
                     cantidad_servicios = len(camion.servicio_ids)
-                    html_content += f"""
-                        <td>{camion.matricula}</td>
-                        <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
-                        </tr>
-                    """
+                    if fila == 1:
+                        html_content += f"""
+                            <td>{camion.matricula}</td>
+                            <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                            </tr>
+                        """
+                        fila = 0
+                    else:
+                        html_content += f"""
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{camion.matricula}</td>
+                            <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                            </tr>
+                        """
+
+
+                    
 
 
             html_content += """
