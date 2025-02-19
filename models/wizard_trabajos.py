@@ -35,13 +35,9 @@ class WizardTrabajos(models.TransientModel):
             ])
 
             if trabajos:  # Solo agregar el título si hay datos
-                html_content = """
-                    <style>
-                        .informe { font-family: Arial, sans-serif; margin: 20px; }
-                        .informe th, .informe td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                    </style>
+                html_content = """                   
                     <div class="clearfix">
-                    <div class="informe">
+                    <div>
                         <h2>Informe de Trabajos</h2>
                         <table style="width: 100%; border-collapse: collapse; margin-top: 10px">
                             <thead>
