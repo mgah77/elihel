@@ -68,15 +68,26 @@ class WizardTrabajos(models.TransientModel):
         # Escribir los datos
         row = 1
         for trabajo in trabajos:
+            primera_fila_trabajo = True  # Bandera para la primera fila del trabajo
             for camion in trabajo.camion_ids:
                 # Formatear la fecha en formato dd-mmm-YY
                 fecha_formateada = trabajo.fecha_llegada.strftime('%d-%b-%y')
 
-                # Escribir los datos fijos
-                sheet.write(row, 0, trabajo.numero_certificado)
-                sheet.write(row, 1, trabajo.nombre)
-                sheet.write(row, 2, trabajo.matricula)
-                sheet.write(row, 3, fecha_formateada)
+                # Escribir los datos fijos solo en la primera fila del trabajo
+                if primera_fila_trabajo:
+                    sheet.write(row, 0, trabajo.numero_certificado)
+                    sheet.write(row, 1, trabajo.nombre)
+                    sheet.write(row, 2, trabajo.matricula)
+                    sheet.write(row, 3, fecha_formateada)
+                    primera_fila_trabajo = False
+                else:
+                    # Dejar vacías las celdas de Certificado, Barco, Matrícula y Fecha
+                    sheet.write(row, 0, "")
+                    sheet.write(row, 1, "")
+                    sheet.write(row, 2, "")
+                    sheet.write(row, 3, "")
+
+                # Escribir los datos del camión
                 sheet.write(row, 4, camion.matricula)
 
                 # Contar los servicios por tipo para este camión
