@@ -43,6 +43,7 @@ class WizardTrabajos(models.TransientModel):
                         .informe th, .informe td { border: 1px solid #ddd; padding: 8px; text-align: left; }
                         .informe th { background-color: #f2f2f2; }
                     </style>
+                    <div class="clearfix">
                     <div class="informe">
                         <h2>Informe de Trabajos</h2>
                         <table>
@@ -86,6 +87,7 @@ class WizardTrabajos(models.TransientModel):
                 html_content += """
                             </tbody>
                         </table>
+                    </div>
                     </div>
                 """
                 self.html_resultados = html_content
