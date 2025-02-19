@@ -23,6 +23,7 @@ class WizardTrabajos(models.TransientModel):
     anno = fields.Integer(string='Año', default=lambda self: datetime.now().year, required=True)
     html_resultados = fields.Html(string='Resultados', readonly=True, default="")
 
+
     def exportar_a_excel(self):
         # Obtener los datos filtrados
         ultimo_dia_mes = calendar.monthrange(self.anno, int(self.mes))[1]
@@ -36,24 +37,53 @@ class WizardTrabajos(models.TransientModel):
         workbook = xlwt.Workbook()
         sheet = workbook.add_sheet('Trabajos')
 
-        # Definir los encabezados
-        headers = [
-            'Certificado', 'Barco', 'Matrícula', 'Fecha', 'Camiones', 'Cantidad de Servicios'
+        # Definir los encabezados fijos
+        headers_fijos = [
+            'Certificado', 'Barco', 'Matrícula', 'Fecha', 'Camiones'
         ]
-        for col, header in enumerate(headers):
+
+        # Obtener todos los servicios únicos
+        servicios_unicos = set()
+        for trabajo in trabajos:
+            for camion in trabajo.camion_ids:
+                for servicio in camion.servicio_ids:
+                    servicios_unicos.add(servicio.tipo_servicio)
+
+        # Convertir el conjunto de servicios únicos a una lista ordenada
+        servicios_unicos = sorted(list(servicios_unicos))
+
+        # Escribir los encabezados fijos
+        for col, header in enumerate(headers_fijos):
             sheet.write(0, col, header)
+
+        # Escribir los encabezados de servicios
+        for col, servicio in enumerate(servicios_unicos, start=len(headers_fijos)):
+            sheet.write(0, col, servicio)
 
         # Escribir los datos
         row = 1
         for trabajo in trabajos:
             for camion in trabajo.camion_ids:
-                cantidad_servicios = len(camion.servicio_ids)
+                # Escribir los datos fijos
                 sheet.write(row, 0, trabajo.numero_certificado)
                 sheet.write(row, 1, trabajo.nombre)
                 sheet.write(row, 2, trabajo.matricula)
                 sheet.write(row, 3, trabajo.fecha_llegada)
                 sheet.write(row, 4, camion.matricula)
-                sheet.write(row, 5, cantidad_servicios)
+
+                # Contar los servicios por tipo para este camión
+                servicios_camion = {}
+                for servicio in camion.servicio_ids:
+                    if servicio.tipo_servicio in servicios_camion:
+                        servicios_camion[servicio.tipo_servicio] += servicio.cantidad
+                    else:
+                        servicios_camion[servicio.tipo_servicio] = servicio.cantidad
+
+                # Escribir la cantidad de servicios por tipo
+                for col, servicio in enumerate(servicios_unicos, start=len(headers_fijos)):
+                    cantidad = servicios_camion.get(servicio, 0)
+                    sheet.write(row, col, cantidad)
+
                 row += 1
 
         # Guardar el archivo en un objeto BytesIO
