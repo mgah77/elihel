@@ -34,79 +34,63 @@ class WizardTrabajos(models.TransientModel):
                 ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
-            # Generar el contenido HTML sin repetir el encabezado
-            html_content = """
-                <style>
-                    .informe {
-                        font-family: Arial, sans-serif;
-                        margin: 20px;
-                    }
-                    .informe h2 {
-                        color: #333;
-                    }
-                    .informe table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin-top: 10px;
-                    }
-                    .informe th, .informe td {
-                        border: 1px solid #ddd;
-                        padding: 8px;
-                        text-align: left;
-                    }
-                    .informe th {
-                        background-color: #f2f2f2;
-                    }
-                </style>
-                <div class="informe">
-                    <h2>Informe de Trabajos</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Certificado</th>
-                                <th>Barco</th>
-                                <th>Matrícula</th>
-                                <th>Fecha</th>
-                                <th>Camiones</th>
-                                <th>Cantidad de Servicios</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-            """
+            if trabajos:  # Solo agregar el título si hay datos
+                html_content = """
+                    <style>
+                        .informe { font-family: Arial, sans-serif; margin: 20px; }
+                        .informe h2 { color: #333; }
+                        .informe table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+                        .informe th, .informe td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        .informe th { background-color: #f2f2f2; }
+                    </style>
+                    <div class="informe">
+                        <h2>Informe de Trabajos</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Certificado</th>
+                                    <th>Barco</th>
+                                    <th>Matrícula</th>
+                                    <th>Fecha</th>
+                                    <th>Camiones</th>
+                                    <th>Cantidad de Servicios</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                """
+                for trabajo in trabajos:
+                    primera_fila = True
+                    for camion in trabajo.camion_ids:
+                        cantidad_servicios = len(camion.servicio_ids)
+                        if primera_fila:
+                            html_content += f"""
+                                <tr>
+                                    <td>{trabajo.numero_certificado}</td>
+                                    <td>{trabajo.nombre}</td>
+                                    <td>{trabajo.matricula}</td>
+                                    <td>{trabajo.fecha_llegada}</td>
+                                    <td>{camion.matricula}</td>
+                                    <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                                </tr>
+                            """
+                            primera_fila = False
+                        else:
+                            html_content += f"""
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>{camion.matricula}</td>
+                                    <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                                </tr>
+                            """
 
-            for trabajo in trabajos:
-                primera_fila = True
-                for camion in trabajo.camion_ids:
-                    cantidad_servicios = len(camion.servicio_ids)
-                    if primera_fila:
-                        html_content += f"""
-                            <tr>
-                                <td>{trabajo.numero_certificado}</td>
-                                <td>{trabajo.nombre}</td>
-                                <td>{trabajo.matricula}</td>
-                                <td>{trabajo.fecha_llegada}</td>
-                                <td>{camion.matricula}</td>
-                                <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
-                            </tr>
-                        """
-                        primera_fila = False
-                    else:
-                        html_content += f"""
-                            <tr>
-                                <td colspan="4"></td>
-                                <td>{camion.matricula}</td>
-                                <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
-                            </tr>
-                        """
-
-            html_content += """
-                        </tbody>
-                    </table>
-                </div>
-            """
-
-            # Asignar el contenido HTML al campo html_resultados
-            self.html_resultados = html_content
+                html_content += """
+                            </tbody>
+                        </table>
+                    </div>
+                """
+                self.html_resultados = html_content
+            else:
+                self.html_resultados = "<p>No hay trabajos en este período.</p>"
 
 
 class WizardTrabajosResultado(models.TransientModel):
