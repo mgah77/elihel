@@ -73,36 +73,21 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
-                primera_fila_trabajo = True
-                # Si no hay camiones, creamos una fila vacía para el trabajo
-                if not trabajo.camion_ids:
+                html_content += f"""
+                    <tr>
+                        <td>{trabajo.numero_certificado}</td>
+                        <td>{trabajo.nombre}</td>
+                        <td>{trabajo.matricula}</td>
+                        <td>{trabajo.fecha_llegada}</td>
+                """    
+                for camion in trabajo.camion_ids:
+                    cantidad_servicios = len(camion.servicio_ids)
                     html_content += f"""
-                        <tr>
-                            <td>{trabajo.numero_certificado}</td>
-                            <td>{trabajo.nombre}</td>
-                            <td>{trabajo.matricula}</td>
-                            <td>{trabajo.fecha_llegada}</td>
-                            <td></td> <!-- Camiones vacío -->
-                            <td></td> <!-- Cantidad de servicios vacío -->
+                        <td>{camion.matricula}</td>
+                        <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
                         </tr>
                     """
-                else:
-                    for camion in trabajo.camion_ids:
-                        cantidad_servicios = len(camion.servicio_ids)
-                        html_content += "<tr>"
-                        if primera_fila_trabajo:
-                            html_content += f"""
-                                <td rowspan="{len(trabajo.camion_ids)}">{trabajo.numero_certificado}</td>
-                                <td rowspan="{len(trabajo.camion_ids)}">{trabajo.nombre}</td>
-                                <td rowspan="{len(trabajo.camion_ids)}">{trabajo.matricula}</td>
-                                <td rowspan="{len(trabajo.camion_ids)}">{trabajo.fecha_llegada}</td>
-                            """
-                            primera_fila_trabajo = False
-                        html_content += f"""
-                            <td>{camion.matricula}</td>
-                            <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
-                        """
-                        html_content += "</tr>"
+
 
             html_content += """
                         </tbody>
