@@ -22,7 +22,7 @@ class WizardTrabajos(models.TransientModel):
 
     @api.onchange('lugar', 'mes', 'anno')
     def _onchange_filtrar_trabajos(self):
-        # Reiniciar el contenido HTML
+        # Reiniciar el contenido HTML correctamente
         self.html_resultados = ""
 
         if self.lugar and self.mes and self.anno:
@@ -34,7 +34,7 @@ class WizardTrabajos(models.TransientModel):
                 ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
             ])
 
-            # Generar el contenido HTML
+            # Generar el contenido HTML sin repetir el encabezado
             html_content = """
                 <style>
                     .informe {
@@ -75,32 +75,27 @@ class WizardTrabajos(models.TransientModel):
             """
 
             for trabajo in trabajos:
-                fila = 1
-                html_content += f"""
-                    <tr>
-                        <td>{trabajo.numero_certificado}</td>
-                        <td>{trabajo.nombre}</td>
-                        <td>{trabajo.matricula}</td>
-                        <td>{trabajo.fecha_llegada}</td>
-                """
+                primera_fila = True
                 for camion in trabajo.camion_ids:
                     cantidad_servicios = len(camion.servicio_ids)
-                    if fila == 1:
+                    if primera_fila:
                         html_content += f"""
-                            <td>{camion.matricula}</td>
-                            <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                            <tr>
+                                <td>{trabajo.numero_certificado}</td>
+                                <td>{trabajo.nombre}</td>
+                                <td>{trabajo.matricula}</td>
+                                <td>{trabajo.fecha_llegada}</td>
+                                <td>{camion.matricula}</td>
+                                <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
                             </tr>
                         """
-                        fila = 0
+                        primera_fila = False
                     else:
                         html_content += f"""
                             <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{camion.matricula}</td>
-                            <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                                <td colspan="4"></td>
+                                <td>{camion.matricula}</td>
+                                <td>{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
                             </tr>
                         """
 
@@ -112,6 +107,7 @@ class WizardTrabajos(models.TransientModel):
 
             # Asignar el contenido HTML al campo html_resultados
             self.html_resultados = html_content
+
 
 class WizardTrabajosResultado(models.TransientModel):
     _name = 'elihel.wizard_trabajos.resultado'
