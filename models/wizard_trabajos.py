@@ -33,6 +33,10 @@ class WizardTrabajos(models.TransientModel):
             ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
         ])
 
+        # Obtener las descripciones de los servicios
+        servicio_model = self.env['elihel.servicio']
+        tipo_servicio_selection = dict(servicio_model._fields['tipo_servicio'].selection)
+
         # Crear un libro de Excel y una hoja
         workbook = xlwt.Workbook()
         sheet = workbook.add_sheet('Trabajos')
@@ -42,12 +46,13 @@ class WizardTrabajos(models.TransientModel):
             'Certificado', 'Barco', 'Matrícula', 'Fecha', 'Camiones'
         ]
 
-        # Obtener todos los servicios únicos
+        # Obtener todos los servicios únicos con sus descripciones
         servicios_unicos = set()
         for trabajo in trabajos:
             for camion in trabajo.camion_ids:
                 for servicio in camion.servicio_ids:
-                    servicios_unicos.add(servicio.tipo_servicio)
+                    descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
+                    servicios_unicos.add(descripcion_servicio)
 
         # Convertir el conjunto de servicios únicos a una lista ordenada
         servicios_unicos = sorted(list(servicios_unicos))
@@ -64,20 +69,24 @@ class WizardTrabajos(models.TransientModel):
         row = 1
         for trabajo in trabajos:
             for camion in trabajo.camion_ids:
+                # Formatear la fecha en formato dd-mmm-YY
+                fecha_formateada = trabajo.fecha_llegada.strftime('%d-%b-%y')
+
                 # Escribir los datos fijos
                 sheet.write(row, 0, trabajo.numero_certificado)
                 sheet.write(row, 1, trabajo.nombre)
                 sheet.write(row, 2, trabajo.matricula)
-                sheet.write(row, 3, trabajo.fecha_llegada)
+                sheet.write(row, 3, fecha_formateada)
                 sheet.write(row, 4, camion.matricula)
 
                 # Contar los servicios por tipo para este camión
                 servicios_camion = {}
                 for servicio in camion.servicio_ids:
-                    if servicio.tipo_servicio in servicios_camion:
-                        servicios_camion[servicio.tipo_servicio] += servicio.cantidad
+                    descripcion_servicio = tipo_servicio_selection.get(servicio.tipo_servicio, servicio.tipo_servicio)
+                    if descripcion_servicio in servicios_camion:
+                        servicios_camion[descripcion_servicio] += servicio.cantidad
                     else:
-                        servicios_camion[servicio.tipo_servicio] = servicio.cantidad
+                        servicios_camion[descripcion_servicio] = servicio.cantidad
 
                 # Escribir la cantidad de servicios por tipo
                 for col, servicio in enumerate(servicios_unicos, start=len(headers_fijos)):
