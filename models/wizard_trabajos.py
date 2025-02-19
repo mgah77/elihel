@@ -155,11 +155,11 @@ class WizardTrabajos(models.TransientModel):
                             <thead>
                                 <tr>
                                     <th>Certificado</th>
-                                    <th style="padding-left:20px">Barco</th>
-                                    <th style="padding-left:20px">Matrícula</th>
-                                    <th style="padding-left:20px">Fecha</th>
-                                    <th style="padding-left:20px">Camiones</th>
-                                    <th style="padding-left:20px">Cantidad de Servicios</th>
+                                    <th style="padding-left:10px">Barco</th>
+                                    <th style="padding-left:10px">Matrícula</th>
+                                    <th style="padding-left:10px">Fecha</th>
+                                    <th style="padding-left:10px">Camiones</th>
+                                    <th style="padding-left:10px">Cantidad de Servicios</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,11 +172,11 @@ class WizardTrabajos(models.TransientModel):
                             html_content += f"""
                                 <tr>
                                     <td>{trabajo.numero_certificado}</td>
-                                    <td style="padding-left:20px">{trabajo.nombre}</td>
-                                    <td style="padding-left:20px">{trabajo.matricula}</td>
-                                    <td style="padding-left:20px">{trabajo.fecha_llegada}</td>
-                                    <td style="padding-left:20px">{camion.matricula}</td>
-                                    <td style="padding-left:20px">{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                                    <td style="padding-left:10px">{trabajo.nombre}</td>
+                                    <td style="padding-left:10px">{trabajo.matricula}</td>
+                                    <td style="padding-left:10px">{trabajo.fecha_llegada}</td>
+                                    <td style="padding-left:10px">{camion.matricula}</td>
+                                    <td style="padding-left:10px">{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
                                 </tr>
                             """
                             primera_fila = False
@@ -184,11 +184,11 @@ class WizardTrabajos(models.TransientModel):
                             html_content += f"""
                                 <tr>
                                     <td></td>
-                                    <td style="padding-left:20px"></td>
-                                    <td style="padding-left:20px"></td>
-                                    <td style="padding-left:20px"></td>
-                                    <td style="padding-left:20px">{camion.matricula}</td>
-                                    <td style="padding-left:20px">{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
+                                    <td style="padding-left:10px"></td>
+                                    <td style="padding-left:10px"></td>
+                                    <td style="padding-left:10px"></td>
+                                    <td style="padding-left:10px">{camion.matricula}</td>
+                                    <td style="padding-left:10px">{cantidad_servicios} servicio{'s' if cantidad_servicios != 1 else ''}</td>
                                 </tr>
                             """
 
