@@ -38,15 +38,12 @@ class WizardTrabajos(models.TransientModel):
                 html_content = """
                     <style>
                         .informe { font-family: Arial, sans-serif; margin: 20px; }
-                        .informe h2 { color: #333; }
-                        .informe table { width: 100%; border-collapse: collapse; margin-top: 10px; }
                         .informe th, .informe td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                        .informe th { background-color: #f2f2f2; }
                     </style>
                     <div class="clearfix">
                     <div class="informe">
                         <h2>Informe de Trabajos</h2>
-                        <table>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px">
                             <thead>
                                 <tr>
                                     <th>Certificado</th>
