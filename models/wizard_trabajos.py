@@ -35,6 +35,7 @@ class WizardTrabajos(models.TransientModel):
             ])
 
             # Generar el contenido HTML
+            self.html_resultados = ""
             html_content = """
                 <style>
                     .informe {
