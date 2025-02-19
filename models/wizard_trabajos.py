@@ -18,7 +18,65 @@ class WizardTrabajos(models.TransientModel):
     ], string='Mes', required=True)
 
     anno = fields.Integer(string='Año', default=lambda self: datetime.now().year, required=True)
-    html_resultados = fields.Html(string='Resultados', readonly=True)
+    html_resultados = fields.Html(string='Resultados', readonly=True, default="")
+
+    def exportar_a_excel(self):
+        # Obtener los datos filtrados
+        ultimo_dia_mes = calendar.monthrange(self.anno, int(self.mes))[1]
+        trabajos = self.env['elihel.barco'].search([
+            ('lugar', '=', self.lugar),
+            ('fecha_llegada', '>=', f'{self.anno}-{self.mes}-01'),
+            ('fecha_llegada', '<=', f'{self.anno}-{self.mes}-{ultimo_dia_mes}'),
+        ])
+
+        # Crear un libro de Excel y una hoja
+        workbook = xlwt.Workbook()
+        sheet = workbook.add_sheet('Trabajos')
+
+        # Definir los encabezados
+        headers = [
+            'Certificado', 'Barco', 'Matrícula', 'Fecha', 'Camiones', 'Cantidad de Servicios'
+        ]
+        for col, header in enumerate(headers):
+            sheet.write(0, col, header)
+
+        # Escribir los datos
+        row = 1
+        for trabajo in trabajos:
+            for camion in trabajo.camion_ids:
+                cantidad_servicios = len(camion.servicio_ids)
+                sheet.write(row, 0, trabajo.numero_certificado)
+                sheet.write(row, 1, trabajo.nombre)
+                sheet.write(row, 2, trabajo.matricula)
+                sheet.write(row, 3, trabajo.fecha_llegada)
+                sheet.write(row, 4, camion.matricula)
+                sheet.write(row, 5, cantidad_servicios)
+                row += 1
+
+        # Guardar el archivo en un objeto BytesIO
+        output = BytesIO()
+        workbook.save(output)
+        output.seek(0)
+
+        # Codificar el archivo en base64
+        excel_file = base64.b64encode(output.read())
+        output.close()
+
+        # Crear un registro de ir.attachment para descargar el archivo
+        attachment = self.env['ir.attachment'].create({
+            'name': f"Informe_Trabajos_{self.lugar}_{self.mes}_{self.anno}.xls",
+            'datas': excel_file,
+            'res_model': self._name,
+            'res_id': self.id,
+            'type': 'binary',
+        })
+
+        # Devolver una acción para descargar el archivo
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f"/web/content/{attachment.id}?download=true",
+            'target': 'self',
+        }
 
     @api.onchange('lugar', 'mes', 'anno')
     def _onchange_filtrar_trabajos(self):

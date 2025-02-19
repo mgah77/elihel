@@ -1,27 +1,25 @@
 <odoo>
     <!-- Vista de formulario para el Wizard -->
-    <record id="view_wizard_trabajos_form" model="ir.ui.view">
-        <field name="name">elihel.wizard_trabajos.form</field>
-        <field name="model">elihel.wizard_trabajos</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="lugar"/>  <!-- Lugar de trabajo -->
-                        <field name="mes"/>  <!-- Mes del trabajo -->
-                        <field name="anno"/>  <!-- Año del trabajo -->
-                    </group>
-                    <div class="oe_title">
-                        <h2>Informe de Trabajos</h2>  <!-- Título del informe -->
-                    </div>
-                    <field name="html_resultados" widget="html"/>  <!-- Mostrar el informe en HTML -->
-                    <footer>
-                        <button string="Cerrar" class="btn-secondary" special="cancel"/>
-                    </footer>
-                </sheet>
-            </form>
-        </field>
-    </record>
+<record id="view_wizard_trabajos_form" model="ir.ui.view">
+    <field name="name">elihel.wizard.trabajos.form</field>
+    <field name="model">elihel.wizard_trabajos</field>
+    <field name="arch" type="xml">
+        <form string="Filtrar Trabajos">
+            <sheet>
+                <group>
+                    <field name="lugar"/>
+                    <field name="mes"/>
+                    <field name="anno"/>
+                    <field name="html_resultados" widget="html"/>
+                </group>
+            </sheet>
+            <footer>
+                <button string="Exportar a Excel" type="object" name="exportar_a_excel" class="btn-primary"/>
+                <button string="Cerrar" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
 
     <!-- Acción para abrir el Wizard -->
     <record id="action_wizard_trabajos" model="ir.actions.act_window">
