@@ -67,7 +67,7 @@ class WizardTrabajos(models.TransientModel):
                             html_content += f"""
                                 <tr>
                                     <td>{trabajo.numero_certificado}</td>
-                                    <td>{trabajo.nombre}</td>
+                                    <td style="padding-left:20px">{trabajo.nombre}</td>
                                     <td>{trabajo.matricula}</td>
                                     <td>{trabajo.fecha_llegada}</td>
                                     <td>{camion.matricula}</td>
