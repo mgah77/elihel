@@ -68,4 +68,11 @@ class PrecioServicio(models.Model):
     _name = 'elihel.precio.servicio'
     _description = 'Precios de Servicios'
 
+    tipo_servicio = fields.Selection(
+        selection=lambda self: self.env['elihel.servicio']._fields['tipo_servicio'].selection,
+        string='Tipo de Servicio',
+        required=True,
+        unique=True
+    )
+  
     
