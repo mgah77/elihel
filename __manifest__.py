@@ -9,9 +9,9 @@
 'version': "2.0",
 'data': ['security/groups.xml',
          'security/ir.model.access.csv',
-         'data/sequences.xml',                   
+         'data/sequences.xml',               
+         'views/barco_views.xml',    
          'views/barco_info_views.xml',
-         'views/barco_views.xml',
          'views/camion_views.xml',
          'views/servicio_views.xml',
          'views/wizard_trabajos_views.xml',  # Vistas para el Wizard
