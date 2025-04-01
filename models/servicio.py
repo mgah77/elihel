@@ -72,14 +72,19 @@ class Servicio(models.Model):
 class PrecioServicio(models.Model):
     _name = 'elihel.precio.servicio'
     _description = 'Precios de Servicios'
+    _rec_name = 'tipo_servicio'
 
     tipo_servicio = fields.Selection(
         selection=lambda self: self.env['elihel.servicio']._fields['tipo_servicio'].selection,
         string='Tipo de Servicio',
-        required=True,
-        unique=True
+        required=True
     )
-  
+    
+    lugar = fields.Selection([
+        ('pue', 'Puerto Montt'),
+        ('cco', 'Chacabuco'),
+    ], string='Lugar', required=True)
+    
     precio = fields.Integer(
         string='Precio',
         required=True,
@@ -92,10 +97,12 @@ class PrecioServicio(models.Model):
         store=True
     )
 
+    _sql_constraints = [
+        ('precio_servicio_lugar_uniq', 'unique(tipo_servicio, lugar)', 'Ya existe un precio para este servicio en este lugar!'),
+    ]
+
     @api.depends('tipo_servicio')
     def _compute_dato(self):
         for record in self:
-            # Obtenemos el diccionario de selección
             selection_dict = dict(self._fields['tipo_servicio'].selection)
-            # Asignamos la descripción correspondiente al código
             record.dato = selection_dict.get(record.tipo_servicio, '')
