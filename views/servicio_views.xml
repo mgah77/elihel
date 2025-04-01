@@ -29,47 +29,44 @@
         </field>
     </record>
 
-        <record id="view_precio_servicio_tree" model="ir.ui.view">
-        <field name="name">elihel.precio.servicio.tree</field>
-        <field name="model">elihel.precio.servicio</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="tipo_servicio"/>
-                <field name="dato"/>
-                <field name="precio"/>
-            </tree>
-        </field>
-    </record>
+ <record id="view_precio_servicio_tree" model="ir.ui.view">
+    <field name="name">elihel.precio.servicio.tree</field>
+    <field name="model">elihel.precio.servicio</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="tipo_servicio"/>
+            <field name="dato"/>
+            <field name="lugar"/>
+            <field name="precio"/>
+        </tree>
+    </field>
+</record>
 
-    <!-- Vista de formulario para precios de servicios -->
-    <record id="view_precio_servicio_form" model="ir.ui.view">
-        <field name="name">elihel.precio.servicio.form</field>
-        <field name="model">elihel.precio.servicio</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="tipo_servicio"/>
-                        <field name="precio"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+<record id="view_precio_servicio_form" model="ir.ui.view">
+    <field name="name">elihel.precio.servicio.form</field>
+    <field name="model">elihel.precio.servicio</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="tipo_servicio"/>
+                    <field name="dato" readonly="1"/>
+                    <field name="lugar"/>
+                    <field name="precio"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
 
-    <!-- Acción de menú -->
-    <record id="action_precio_servicio" model="ir.actions.act_window">
-        <field name="name">Precios de Servicios</field>
-        <field name="res_model">elihel.precio.servicio</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+<record id="action_precio_servicio" model="ir.actions.act_window">
+    <field name="name">Precios de Servicios</field>
+    <field name="res_model">elihel.precio.servicio</field>
+    <field name="view_mode">tree,form</field>
+</record>
 
-    <!-- Menú principal -->
-    <menuitem id="menu_precio_servicio_root" parent="menu_elihel_root" name="Configuración de Precios"/>
-    
-    <!-- Submenú -->
-    <menuitem id="menu_precio_servicio" 
-              name="Precios de Servicios" 
-              parent="menu_precio_servicio_root"
-              action="action_precio_servicio"/>
-</odoo>
+<menuitem id="menu_precio_servicio_root" parent="menu_elihel_root" name="Configuración de Precios"/>
+<menuitem id="menu_precio_servicio" 
+          name="Precios por Lugar" 
+          parent="menu_precio_servicio_root"
+          action="action_precio_servicio"/>
