@@ -36,7 +36,6 @@
     </record>
 
     <!-- Menú y acción para BarcoInfo -->
-    <menuitem id="menu_root" name="Servicios"/>
-    <menuitem id="menu_barco_info" name="Información de Barcos" parent="menu_root" action="action_barco_info"/>
+    <menuitem id="menu_barco_info" name="Información de Barcos" parent="menu_elihel_root" action="action_barco_info"/>
 
 </odoo>

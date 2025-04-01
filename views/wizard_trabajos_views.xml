@@ -30,5 +30,5 @@
     </record>
 
     <!-- Menú para abrir el Wizard -->
-    <menuitem id="menu_wizard_trabajos" name="Filtrar Trabajos" parent="menu_root" action="action_wizard_trabajos"/>
+    <menuitem id="menu_wizard_trabajos" name="Filtrar Trabajos" parent="menu_elihel_root" action="action_wizard_trabajos"/>
 </odoo>

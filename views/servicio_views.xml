@@ -65,7 +65,7 @@
     </record>
 
     <!-- Menú principal -->
-    <menuitem id="menu_precio_servicio_root" parent="elihel_menu" name="Configuración de Precios"/>
+    <menuitem id="menu_precio_servicio_root" parent="menu_elihel_root" name="Configuración de Precios"/>
     
     <!-- Submenú -->
     <menuitem id="menu_precio_servicio" 
