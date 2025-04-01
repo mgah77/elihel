@@ -62,7 +62,7 @@ class Servicio(models.Model):
 
     def _compute_precio_unitario(self):
         return
-        
+
 class PrecioServicio(models.Model):
     _name = 'elihel.precio.servicio'
     _description = 'Precios de Servicios'
@@ -83,14 +83,6 @@ class PrecioServicio(models.Model):
     
     descripcion = fields.Char(
         string='Descripción',
-        compute='_compute_descripcion',
-        store=True
+        related='tipo_servicio',
+        readonly=True
     )
-    
-    @api.depends('tipo_servicio')
-    def _compute_descripcion(self):
-        for record in self:
-            # Obtenemos el diccionario de selección
-            selection_dict = dict(self._fields['tipo_servicio'].selection)
-            # Asignamos la descripción correspondiente al código
-            record.descripcion = selection_dict.get(record.tipo_servicio, '')
