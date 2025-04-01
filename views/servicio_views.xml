@@ -70,3 +70,5 @@
           name="Precios por Lugar" 
           parent="menu_precio_servicio_root"
           action="action_precio_servicio"/>
+
+</odoo>
