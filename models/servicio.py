@@ -82,7 +82,7 @@ class PrecioServicio(models.Model):
     )
 
     dato = fields.Char(
-        string='Dato',
+        string='Descripción',
         required=True,
         default=''
     )
