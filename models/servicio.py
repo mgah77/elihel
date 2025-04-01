@@ -80,3 +80,9 @@ class PrecioServicio(models.Model):
         required=True,
         default=0
     )
+
+    dato = fields.Char(
+        string='Dato',
+        required=True,
+        default=''
+    )
