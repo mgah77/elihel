@@ -61,7 +61,12 @@ class Servicio(models.Model):
     )
 
     def _compute_precio_unitario(self):
-        return
+        precio_model = self.env['elihel.precio.servicio']
+        for servicio in self:
+            precio = precio_model.search([
+                ('tipo_servicio', '=', servicio.tipo_servicio)
+            ], limit=1)
+            servicio.precio_unitario = precio.precio if precio else 0        
 
 
 class PrecioServicio(models.Model):
