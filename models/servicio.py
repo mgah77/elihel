@@ -91,3 +91,11 @@ class PrecioServicio(models.Model):
         compute='_compute_dato',
         store=True
     )
+
+    @api.depends('tipo_servicio')
+    def _compute_dato(self):
+        for record in self:
+            # Obtenemos el diccionario de selección
+            selection_dict = dict(self._fields['tipo_servicio'].selection)
+            # Asignamos la descripción correspondiente al código
+            record.dato = selection_dict.get(record.tipo_servicio, '')
