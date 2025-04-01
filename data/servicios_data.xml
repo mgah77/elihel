@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Registros predefinidos para elihel.serv.rel -->
+        <!-- Registros predefinidos para puerto montt -->
         <record id="camion" model="elihel.serv_pmo.rel">
             <field name="name">Camion</field>
             <field name="precio">5099</field>
@@ -144,7 +144,7 @@
         </record>
 
 
-         <!-- Registros predefinidos para elihel.serv.rel -->
+         <!-- Registros predefinidos para chacabuco -->
         <record id="camion" model="elihel.serv_cco.rel">
             <field name="name">Camion</field>
             <field name="precio">7931</field>

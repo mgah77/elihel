@@ -52,3 +52,43 @@ class Servicio(models.Model):
 
     cantidad = fields.Integer(string='Cantidad', required=True)  # Cantidad del servicio
     camion_id = fields.Many2one('elihel.camion', string='Camión', ondelete='cascade')  # Relación con el camión
+
+       
+    # Nuevo campo para precio unitario (calculado)
+    precio_unitario = fields.Integer(
+        string='Precio Unitario',
+        compute='_compute_precio_unitario',
+        store=True
+    )
+    
+    def _compute_precio_unitario(self):
+        precio_model = self.env['elihel.precio.servicio']
+        for servicio in self:
+            precio = precio_model.search([
+                ('tipo_servicio', '=', servicio.tipo_servicio)
+            ], limit=1)
+            servicio.precio_unitario = precio.precio if precio else 0
+
+class PrecioServicio(models.Model):
+    _name = 'elihel.precio.servicio'
+    _description = 'Precios de Servicios'
+    _rec_name = 'tipo_servicio'
+    
+    tipo_servicio = fields.Selection(
+        selection=lambda self: self.env['elihel.servicio']._fields['tipo_servicio'].selection,
+        string='Tipo de Servicio',
+        required=True,
+        unique=True
+    )
+    
+    precio = fields.Float(
+        string='Precio',
+        required=True,
+        default=0
+    )
+    
+    descripcion = fields.Char(
+        string='Descripción',
+        related='tipo_servicio',
+        readonly=True
+    )
