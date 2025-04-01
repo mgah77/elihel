@@ -88,11 +88,6 @@ class PrecioServicio(models.Model):
 
     dato = fields.Char(
         string='Descripción',
-        compute='_compute_descripcion',
-        store=True
+        required=True,
+        default=''
     )
-
-    
-    @api.depends('tipo_servicio')
-    def _compute_descripcion(self):
-        return
