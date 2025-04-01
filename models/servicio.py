@@ -82,7 +82,7 @@ class PrecioServicio(models.Model):
     )
 
     descripcion = fields.Char(
-        string='Descripción',
+        string='Descripcion',
         compute='_compute_descripcion',
         store=True
     )
