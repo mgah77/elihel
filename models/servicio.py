@@ -75,4 +75,10 @@ class PrecioServicio(models.Model):
         unique=True
     )
   
+    precio = fields.Integer(
+        string='Precio',
+        required=True,
+        default=0
+    )
+    
     
