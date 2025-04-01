@@ -110,5 +110,10 @@ class PrecioServicio(models.Model):
     @api.depends('tipo_servicio')
     def _compute_dato(self):
         for record in self:
-            selection_dict = dict(self._fields['tipo_servicio'].selection)
+            # Obtenemos la lista de selección del modelo Servicio
+            servicio_model = self.env['elihel.servicio']
+            selection_list = servicio_model._fields['tipo_servicio'].selection
+            # Convertimos a diccionario
+            selection_dict = dict(selection_list)
+            # Asignamos la descripción correspondiente al código
             record.dato = selection_dict.get(record.tipo_servicio, '')
