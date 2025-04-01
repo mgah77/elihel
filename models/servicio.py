@@ -52,3 +52,13 @@ class Servicio(models.Model):
 
     cantidad = fields.Integer(string='Cantidad', required=True)  # Cantidad del servicio
     camion_id = fields.Many2one('elihel.camion', string='Camión', ondelete='cascade')  # Relación con el camión
+
+    # Nuevo campo para precio unitario (calculado)
+    precio_unitario = fields.Integer(
+        string='Precio Unitario',
+        compute='_compute_precio_unitario',
+        store=True
+    )
+
+    def _compute_precio_unitario(self):
+        return
