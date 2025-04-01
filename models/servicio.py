@@ -88,5 +88,6 @@ class PrecioServicio(models.Model):
 
     dato = fields.Char(
         string='Descripción',
-        readonly=True, related='tipo_servicio'
+        compute='_compute_dato',
+        store=True
     )
