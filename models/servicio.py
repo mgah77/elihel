@@ -62,3 +62,10 @@ class Servicio(models.Model):
 
     def _compute_precio_unitario(self):
         return
+
+
+class PrecioServicio(models.Model):
+    _name = 'elihel.precio.servicio'
+    _description = 'Precios de Servicios'
+
+    
